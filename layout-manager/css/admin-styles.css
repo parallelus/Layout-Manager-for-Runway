@@ -1,0 +1,11 @@
+.optional-label-spinner.spinner {
+	display: block;
+}
+.optional-label-spinner {
+	position: relative;
+	margin-top:29px;
+	height:50px;
+	width:256px;
+	float:left	
+}
+#theme-meta-box-content-options label { font-weight: bold; }
