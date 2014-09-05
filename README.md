@@ -1,4 +1,6 @@
-Layout-Manager-for-Runway
+Layout Manager for Runway
 =========================
 
-An extension for the Runway framework to build WordPress templates with drag and drop controls.
+An extension for the <a href="//runwaywp.com">Runway</a> framework to build WordPress templates with drag and drop controls.
+
+https://github.com/parallelus/Runway-Framework
