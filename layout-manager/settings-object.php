@@ -242,7 +242,7 @@ class Layout_Manager_Admin_Object extends Runway_Admin_Object {
 	// Get all layouts
 	public function get_layouts(){
 		if(isset($this->layouts_manager_options['layouts'])){
-			usort($this->layouts_manager_options['layouts'], array($this, 'sort_layouts_by_title'));
+			uasort($this->layouts_manager_options['layouts'], array($this, 'sort_layouts_by_title'));
 			return stripslashes_deep($this->layouts_manager_options['layouts']);
 		}
 		else{
@@ -469,7 +469,7 @@ class Layout_Manager_Admin_Object extends Runway_Admin_Object {
 	// Get all headers
 	public function get_headers(){ 
 		if(isset($this->layouts_manager_options['headers'])){
-			usort($this->layouts_manager_options['headers'], array($this, 'sort_headers_by_title'));
+			uasort($this->layouts_manager_options['headers'], array($this, 'sort_headers_by_title'));
 			return stripslashes_deep($this->layouts_manager_options['headers']);
 		}
 		else{
@@ -532,7 +532,7 @@ class Layout_Manager_Admin_Object extends Runway_Admin_Object {
 	// Get all footers
 	public function get_footers(){
 		if(isset($this->layouts_manager_options['footers'])){
-			usort($this->layouts_manager_options['footers'], array($this, 'sort_footers_by_title'));
+			uasort($this->layouts_manager_options['footers'], array($this, 'sort_footers_by_title'));
 			return stripslashes_deep($this->layouts_manager_options['footers']);
 		}
 		else{
