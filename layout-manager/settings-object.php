@@ -242,11 +242,20 @@ class Layout_Manager_Admin_Object extends Runway_Admin_Object {
 	// Get all layouts
 	public function get_layouts(){
 		if(isset($this->layouts_manager_options['layouts'])){
+			usort($this->layouts_manager_options['layouts'], array($this, 'sort_layouts_by_title'));
 			return stripslashes_deep($this->layouts_manager_options['layouts']);
 		}
 		else{
 			return false;
 		}
+	}
+	private function sort_layouts_by_title($a, $b) {
+		if(!isset($a['title']) || !isset($b['title']))
+			return 0;
+		else if(is_array($a['title']) || is_array($b['title']) || is_object($a['title']) || is_object($b['title']))
+			return 0;
+		else
+			return strcmp($a['title'], $b['title']);
 	}
 
 	// Get optional labels by alias
@@ -460,12 +469,22 @@ class Layout_Manager_Admin_Object extends Runway_Admin_Object {
 	// Get all headers
 	public function get_headers(){ 
 		if(isset($this->layouts_manager_options['headers'])){
+			usort($this->layouts_manager_options['headers'], array($this, 'sort_headers_by_title'));
 			return stripslashes_deep($this->layouts_manager_options['headers']);
 		}
 		else{
 			return false;
 		}
 	}
+	private function sort_headers_by_title($a, $b) {
+		if(!isset($a['title']) || !isset($b['title']))
+			return 0;
+		else if(is_array($a['title']) || is_array($b['title']) || is_object($a['title']) || is_object($b['title']))
+			return 0;
+		else
+			return strcmp($a['title'], $b['title']);
+	}
+	
 	// Add or update header by ajax request
 	function ajax_update_header(){		
 		$alias = isset($_REQUEST['alias']) ? $_REQUEST['alias'] : sanitize_title( $_REQUEST['title'] );
@@ -513,11 +532,20 @@ class Layout_Manager_Admin_Object extends Runway_Admin_Object {
 	// Get all footers
 	public function get_footers(){
 		if(isset($this->layouts_manager_options['footers'])){
+			usort($this->layouts_manager_options['footers'], array($this, 'sort_footers_by_title'));
 			return stripslashes_deep($this->layouts_manager_options['footers']);
 		}
 		else{
 			return false;
 		}
+	}
+	private function sort_footers_by_title($a, $b) {
+		if(!isset($a['title']) || !isset($b['title']))
+			return 0;
+		else if(is_array($a['title']) || is_array($b['title']) || is_object($a['title']) || is_object($b['title']))
+			return 0;
+		else
+			return strcmp($a['title'], $b['title']);
 	}
 
 	/* ---- Work with "Other Options" ---- */
