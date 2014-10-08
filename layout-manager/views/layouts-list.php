@@ -29,6 +29,7 @@
 						</td>
 						<td class="column-controls" style="text-align:right;">
 							<a href="<?php echo $this->self_url('edit-layout'); ?>&alias=<?php echo $values['alias']; ?>"><?php _e('Edit', 'framework') ?></a> | 
+							<a href="#" class="duplicate_layout" data-alias="<?php echo $values['alias']; ?>"><?php _e('Duplicate', 'framework'); ?></a> | 
 							<a style="color: #BC0B0B;" href="<?php echo $this->self_url(); ?>&navigation=confirm-delete-layout&alias=<?php echo $values['alias']; ?>"><?php _e('Delete', 'framework') ?></a>
 						</td>
 					</tr>
@@ -37,6 +38,16 @@
 				endforeach; ?>
 			</tbody>
 		</table>
+		<div style="display: none;" class="duplicate_layout_dialog">
+			<form action="<?php echo $this->self_url('duplicate-layout'); ?>" method="post">
+				<input type="hidden" name="duplicated_alias" class="duplicated_alias"/>
+				
+				<label for="duplicated_name"><?php _e('Enter new layout title', 'framework'); ?>: </label>
+				<input type="text" value="" name="duplicated_name"/>
+				
+				<input type="submit" value="<?php _e('Duplicate', 'framework'); ?>"/>
+			</form>
+		</div>
 
 		<br>
 

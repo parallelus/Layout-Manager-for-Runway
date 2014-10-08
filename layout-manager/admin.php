@@ -63,7 +63,7 @@ if (!empty($navText)) {
 // Begin tabs
 if(!in_array($this->navigation, array('add-layout', 'edit-layout', 'add-header', 'add-footer', 'edit-options'))): ?>
 	<h2 class="nav-tab-wrapper tab-controlls" style="padding-top: 9px;">
-		<a href="<?php echo $this->self_url(); ?>" class="nav-tab <?php if($this->navigation == '') {echo "nav-tab-active";} ?>"><?php _e('Layouts', 'framework') ?></a>
+		<a href="<?php echo $this->self_url(); ?>" class="nav-tab <?php if($this->navigation == '' || $this->navigation == 'duplicate-layout') {echo "nav-tab-active";} ?>"><?php _e('Layouts', 'framework') ?></a>
 		<?php if(isset($this->layouts_manager_options['settings']['headers']) ): ?>
 			<a href="<?php echo $this->self_url('headers-list'); ?>" class="nav-tab <?php if($this->navigation == 'headers-list' || $this->navigation == 'edit-header') {echo "nav-tab-active";} ?>"><?php _e('Headers', 'framework') ?></a>
 		<?php endif; ?>	
@@ -200,6 +200,14 @@ switch ($this->navigation) {
         $this->enqueue_wp_editor_scripts();
                 
 		require_once('views/add-edit-layout.php');
+	} break;
+
+	case 'duplicate-layout': {
+		$this->duplicate_layout($_POST['duplicated_alias'], $_POST['duplicated_name']);
+		
+		$layouts  = $this->get_layouts();
+		$contexts = $this->get_contexts();
+		require_once('views/layouts-list.php');
 	} break;
 
 	case 'confirm-delete-layout':{

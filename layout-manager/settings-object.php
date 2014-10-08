@@ -233,6 +233,16 @@ class Layout_Manager_Admin_Object extends Runway_Admin_Object {
 		}
 		return false;
 	}
+	
+	public function duplicate_layout($alias, $new_name) {
+		$parent_layout = $this->layouts_manager_options['layouts'][$alias];
+		$time = time();
+		$parent_layout['title'] = $new_name;
+		$parent_layout['alias'] = 'layout-'.$time;
+		$this->layouts_manager_options['layouts']['layout-'.$time] = $parent_layout;
+		update_option($this->option_key, $this->layouts_manager_options);
+		return false;
+	}
 
 	// Get layout by alias
 	public function get_layout($alias) {
