@@ -254,13 +254,11 @@
 						<div class="inside" >
 							<?php if(isset($layouts_manager->layouts_manager_options['settings']['headers']) ):
 								_e('The header action needs to be placed at the very end of header.php. In most cases it will be the last thing in the file:', 'framework'); ?>
-								<pre class="code" style="background: #F3F3F3; color: #333; padding: 10px; font-size: 11px; border: 1px solid #EAEAEA;">// <?php echo __('Begin Layout', 'framework'); ?>
-do_action('output_layout','start');</pre>
+								<pre class="code sample-code">// <?php echo wordwrap(__('Begin Layout', 'framework')." do_action('output_layout','start');", 20); ?></pre>
 							<?php endif; ?>	
 							<?php if(isset($layouts_manager->layouts_manager_options['settings']['footers']) ):						
 								_e('The footer action needs to be placed at the very end of footer.php. In most cases it will be the very first thing in the file:', 'framework'); ?>
-								<pre class="code" style="background: #F3F3F3; color: #333; padding: 10px; font-size: 11px; border: 1px solid #EAEAEA;">// <?php echo __('End Layout', 'framework'); ?>
-do_action('output_layout','end');</pre>
+								<pre class="code sample-code">// <?php echo wordwrap(__('End Layout', 'framework')." do_action('output_layout','end');", 20); ?></pre>
 							<?php endif; ?>									
 						</div>
 					</div>
