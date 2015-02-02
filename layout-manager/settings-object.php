@@ -240,7 +240,14 @@ class Layout_Manager_Admin_Object extends Runway_Admin_Object {
 		$parent_layout['title'] = $new_name;
 		$parent_layout['alias'] = 'layout-'.$time;
 		$this->layouts_manager_options['layouts']['layout-'.$time] = $parent_layout;
+		
+		global $shortname;
+		$other_options = get_option($shortname.'other_options_'.$this->layouts_manager_options['layouts'][$alias]['alias']);
+		$other_option_new_key = $shortname.'other_options_'.$this->layouts_manager_options['layouts']['layout-'.$time]['alias'];
+
 		update_option($this->option_key, $this->layouts_manager_options);
+		update_option($other_option_new_key, $other_options);
+
 		return false;
 	}
 
