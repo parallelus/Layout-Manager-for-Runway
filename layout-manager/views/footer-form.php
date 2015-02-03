@@ -8,7 +8,7 @@
 				<p class="description required"><?php _e('Required', 'framework') ?></p>
 			</th>
 			<td>
-				<input class="input-text " type="text" name="footer-title" id="footer-title" value="<?php echo isset($footer['title']) ? $footer['title'] : ''; ?>">
+				<input class="input-text " type="text" name="footer-title" id="footer-title" value="<?php echo isset($footer['title']) ? esc_attr($footer['title']) : ''; ?>">
 			</td>
 		</tr>
 	</tbody>

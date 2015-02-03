@@ -19,7 +19,7 @@
 
 					<div id="titlewrap">
 						<label class="hide-if-no-js" style="visibility: hidden; " id="title-prompt-text" for="title"><?php _e('Enter title here', 'framework') ?></label>
-						<input type="text" name="post_title" size="30" tabindex="1" value="<?php rf_e($layout['title']); ?>" id="title" autocomplete="off">
+						<input type="text" name="post_title" size="30" tabindex="1" value="<?php esc_attr_e($layout['title']); ?>" id="title" autocomplete="off">
 					</div>
 				</div>
 

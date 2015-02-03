@@ -8,7 +8,7 @@
 				<p class="description required"><?php _e('Required', 'framework') ?></p>
 			</th>
 			<td>
-				<input class="input-text " type="text" name="header-title" id="header-title" value="<?php echo isset($header['title']) ? $header['title'] : ''; ?>">
+				<input class="input-text " type="text" name="header-title" id="header-title" value="<?php echo isset($header['title']) ? esc_attr($header['title']) : ''; ?>">
 			</td>
 		</tr>
 	</tbody>
