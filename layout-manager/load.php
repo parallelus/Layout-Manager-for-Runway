@@ -34,6 +34,7 @@ $settings = array(
 		FRAMEWORK_URL.'extensions/layout-manager/js/jquery-ui-1.10.1.custom.min.js',
 		FRAMEWORK_URL.'extensions/layout-manager/js/layout-builder-plugin.js',
 		FRAMEWORK_URL.'extensions/layout-manager/js/layout-manager.js',
+		FRAMEWORK_URL.'extensions/layout-manager/js/layout-sort.js',
 	),
 	'css' => array(
 		'wp-color-picker',

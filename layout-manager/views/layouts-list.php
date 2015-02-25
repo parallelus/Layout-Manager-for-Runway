@@ -2,7 +2,7 @@
 	<div id="post-body-content" style="width: auto;">
 <br/>
 <?php if(!empty($layouts)): ?>
-		<table class="wp-list-table widefat" style="width: auto; min-width: 50%;">
+		<table class="wp-list-table widefat layouts-list-sortable" style="width: auto; min-width: 50%;">
 			<thead>
 				<tr>
 					<th id="field-name" class="manage-column column-name"><?php _e('Title', 'framework') ?></th>
@@ -14,7 +14,7 @@
 			<tbody id="the-list">
 				<?php 
 				$count = 0;
-				foreach ($layouts as $key => $values): 
+				foreach ($layouts as $key => $values):
 					$trClass = ($count % 2 == 0) ? 'active alt' : 'active';
 					?>
 					<tr class="<?php echo $trClass ?>">
@@ -47,6 +47,11 @@
 				
 				<input type="submit" value="<?php _e('Duplicate', 'framework'); ?>"/>
 			</form>
+		</div>
+		<div style="display: none;" class="save-layouts-sort">
+			<p>
+				<input class="button-primary" value="<?php echo __('Save Layouts Order', 'framework'); ?>">
+			</p>
 		</div>
 
 		<br>

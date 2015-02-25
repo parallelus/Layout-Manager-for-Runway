@@ -35,6 +35,8 @@ class Layout_Manager_Admin_Object extends Runway_Admin_Object {
 		add_action('wp_ajax_get_optional_labels', array($this, 'ajax_get_optional_labels'));
 		add_action('wp_ajax_save_optional_labels', array($this, 'ajax_save_optional_labels'));
 
+		add_action('wp_ajax_save_layouts_sort', array($this, 'ajax_save_layouts_sort'));
+
 		add_action('after_setup_theme', array($this, 'backward_compatibility'), 99);
 
 		$this->init_options();
@@ -259,16 +261,19 @@ class Layout_Manager_Admin_Object extends Runway_Admin_Object {
 	// Get all layouts
 	public function get_layouts(){
 		if(isset($this->layouts_manager_options['layouts'])){
-			uasort($this->layouts_manager_options['layouts'], array($this, 'sort_layouts_by_title'));
+			uasort($this->layouts_manager_options['layouts'], array($this, 'sort_layouts'));
 			return stripslashes_deep($this->layouts_manager_options['layouts']);
 		}
 		else{
 			return false;
 		}
 	}
-	private function sort_layouts_by_title($a, $b) {
+	private function sort_layouts($a, $b) {
 		if(!isset($a['title']) || !isset($b['title']))
 			return 0;
+		else if(isset($a['rank']) && isset($b['rank'])) {
+				return $a['rank'] - $b['rank'];
+			}
 		else if(is_array($a['title']) || is_array($b['title']) || is_object($a['title']) || is_object($b['title']))
 			return 0;
 		else
@@ -328,6 +333,21 @@ class Layout_Manager_Admin_Object extends Runway_Admin_Object {
 		}
 		
 		die(trim(json_encode($optional_labels)));
+	}
+
+	// Save layouts order after drag/drop sort
+	public function ajax_save_layouts_sort(){
+		$data = $_REQUEST;
+		foreach($this->layouts_manager_options['layouts'] as $key => $val) {
+			foreach( $data['ranks'] as $key_sort => $val_sort) {
+				if($key == $val_sort) {
+					$this->layouts_manager_options['layouts'][$key]['rank'] = $key_sort;
+				}
+			}
+		}
+		
+		update_option($this->option_key, $this->layouts_manager_options);		
+		die();
 	}
 
 	// Save optional labels for alias
