@@ -25,7 +25,7 @@
         var ranks = [];
 
         list.each(function(i){
-            ranks.push($(this).attr('data-alias'));
+            ranks.push($(this).attr('data-sort-alias'));
         }); 
 
         $.ajax({

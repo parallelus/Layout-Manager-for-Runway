@@ -17,7 +17,7 @@
 				foreach ($layouts as $key => $values):
 					$trClass = ($count % 2 == 0) ? 'active alt' : 'active';
 					?>
-					<tr class="<?php echo $trClass ?>">
+					<tr class="<?php echo $trClass ?>" data-sort-alias="<?php echo $values['alias']; ?>">
 						<td class="column-name">
 							<a href="<?php echo $this->self_url('edit-layout'); ?>&alias=<?php echo $values['alias']; ?>"><strong><?php echo __(stripslashes($values['title']), 'framework'); ?></strong></a>
 						</td>
