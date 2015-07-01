@@ -2,7 +2,7 @@
 	<div id="post-body-content" style="width: auto;">
 <br/>
 <?php if(!empty($layouts)): ?>
-		<table class="wp-list-table widefat" style="width: auto; min-width: 50%;">
+		<table class="wp-list-table widefat layouts-list-sortable" style="width: auto; min-width: 50%;">
 			<thead>
 				<tr>
 					<th id="field-name" class="manage-column column-name"><?php _e('Title', 'framework') ?></th>
@@ -14,10 +14,10 @@
 			<tbody id="the-list">
 				<?php 
 				$count = 0;
-				foreach ($layouts as $key => $values): 
+				foreach ($layouts as $key => $values):
 					$trClass = ($count % 2 == 0) ? 'active alt' : 'active';
 					?>
-					<tr class="<?php echo $trClass ?>">
+					<tr class="<?php echo $trClass ?>" data-sort-alias="<?php echo $values['alias']; ?>">
 						<td class="column-name">
 							<a href="<?php echo $this->self_url('edit-layout'); ?>&alias=<?php echo $values['alias']; ?>"><strong><?php echo __(stripslashes($values['title']), 'framework'); ?></strong></a>
 						</td>
@@ -29,6 +29,7 @@
 						</td>
 						<td class="column-controls" style="text-align:right;">
 							<a href="<?php echo $this->self_url('edit-layout'); ?>&alias=<?php echo $values['alias']; ?>"><?php _e('Edit', 'framework') ?></a> | 
+							<a href="#" class="duplicate_layout" data-alias="<?php echo $values['alias']; ?>"><?php _e('Duplicate', 'framework'); ?></a> | 
 							<a style="color: #BC0B0B;" href="<?php echo $this->self_url(); ?>&navigation=confirm-delete-layout&alias=<?php echo $values['alias']; ?>"><?php _e('Delete', 'framework') ?></a>
 						</td>
 					</tr>
@@ -37,6 +38,21 @@
 				endforeach; ?>
 			</tbody>
 		</table>
+		<div style="display: none;" class="duplicate_layout_dialog">
+			<form action="<?php echo $this->self_url('duplicate-layout'); ?>" method="post">
+				<input type="hidden" name="duplicated_alias" class="duplicated_alias"/>
+				
+				<label for="duplicated_name"><?php _e('Enter new layout title', 'framework'); ?>: </label>
+				<input type="text" value="" name="duplicated_name"/>
+				
+				<input type="submit" value="<?php _e('Duplicate', 'framework'); ?>"/>
+			</form>
+		</div>
+		<div style="display: none;" class="save-layouts-sort">
+			<p>
+				<input class="button-primary" value="<?php echo __('Save Layouts Order', 'framework'); ?>">
+			</p>
+		</div>
 
 		<br>
 

@@ -240,3 +240,11 @@ legend[class^='customize-control'], span.customize-control-title { display: none
 
 .check-override, .check-override-secondary, .optional-label-override, .optional-label-override-secondary, .optional-label-text-help {
 	display: none; }
+
+.sample-code {
+	background: #F3F3F3; 
+	color: #333; 
+	padding: 10px; 
+	font-size: 11px; 
+	border: 1px solid #EAEAEA;
+}	

@@ -364,6 +364,17 @@
 		else alert(translations_js.title_must_be_set);
 
 	});
+	
+	$('body').on('click', '.duplicate_layout', function(e){
+		e.preventDefault();
+		e.stopPropagation();
+		
+		$('.duplicate_layout_dialog .duplicated_alias').val($(this).data('alias'));
+		$('.duplicate_layout_dialog').dialog({
+			title: translations_js.duplicate_title,
+			modal: true
+		});
+	});
 
 	/* END LAYOUTS FUNCTIONALITY*/
 
