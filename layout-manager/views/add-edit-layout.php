@@ -122,7 +122,7 @@
 						<div class="rowContainer">			
 						</div><!-- / .rowContainer -->
 						<div class="handle rowHandle"></div>
-						<a href="#close" class="delete-row ui-dialog-titlebar-close" role="button"><span class="ui-icon ui-icon-closethick">close</span></a>
+						<a href="#close" tabindex="2" class="delete-row ui-dialog-titlebar-close" title="<?php echo __('Delete Row', 'framework'); ?>" role="button"><span class="ui-icon ui-icon-closethick">close</span></a>
 					</div><!-- / .rowWrapper -->
 
 				</div>
@@ -136,11 +136,11 @@
 							<a href="#desktop" id="desktop" class="responsive-visibility show-on desktop-view" title="<?php _e('Visible on Desktop', 'framework') ?>"></a>
 							<a href="#tablet" id="tablet" class="responsive-visibility show-on tablet-view" title="<?php _e('Visible on Tablet', 'framework') ?>"></a>
 							<a href="#phone" id="phone" class="responsive-visibility show-on phone-view" title="<?php _e('Visible on Phone', 'framework') ?>"></a>
-							<a href="#close" class="delete-column ui-dialog-titlebar-close" role="button"><span class="ui-icon ui-icon-closethick">close</span></a>
+							<a href="#close" class="delete-column ui-dialog-titlebar-close" tabindex="2" title="<?php echo __('Delete Column', 'framework'); ?>" role="button"><span class="ui-icon ui-icon-closethick">close</span></a>
 						</div>
 						<div class="content-element">
 							<div class="handle"></div>
-								<a href="#close" class="delete-element ui-dialog-titlebar-close" role="button"><span class="ui-icon ui-icon-closethick">close</span></a>
+								<a href="#close" class="delete-element ui-dialog-titlebar-close" tabindex="2" title="<?php echo __('Delete Cell', 'framework'); ?>" role="button"><span class="ui-icon ui-icon-closethick">close</span></a>
 								<select name="content_element_type" class="content-element-type">
 									<option value="default_content"><?php _e('Default Content', 'framework') ?></option>
 									<?php
@@ -210,7 +210,7 @@
 						<a href="#desktop" id="desktop" class="responsive-visibility show-on desktop-view" title="<?php _e('Visible on Desktop', 'framework') ?>"></a>
 						<a href="#tablet" id="tablet" class="responsive-visibility show-on tablet-view" title="<?php _e('Visible on Tablet', 'framework') ?>"></a>
 						<a href="#phone" id="phone" class="responsive-visibility show-on phone-view" title="<?php _e('Visible on Phone', 'framework') ?>"></a>
-						<a href="#close" class="delete-column ui-dialog-titlebar-close" role="button"><span class="ui-icon ui-icon-closethick">close</span></a>
+						<a href="#close" class="delete-column ui-dialog-titlebar-close" tabindex="2" title="<?php echo __('Delete Column', 'framework'); ?>" role="button"><span class="ui-icon ui-icon-closethick">close</span></a>
 					</div>
 					<div id="ColumnEnd" style="display:none;"></div>			
 				</div>
@@ -221,7 +221,7 @@
 			<div id="OnlyContentElementTemplate">
 				<div class="content-element">
 				<div class="handle"></div>
-					<a href="#close" class="delete-element ui-dialog-titlebar-close" role="button"><span class="ui-icon ui-icon-closethick">close</span></a>
+					<a href="#close" class="delete-element ui-dialog-titlebar-close" tabindex="2" title="<?php echo __('Delete Cell', 'framework'); ?>" role="button"><span class="ui-icon ui-icon-closethick">close</span></a>
 					<select name="content_element_type" class="content-element-type">
 						<option value="default_content" ><?php _e('Default Content', 'framework') ?></option>
 						<?php
