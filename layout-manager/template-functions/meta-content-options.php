@@ -7,19 +7,19 @@
  * title on the single post screen and disabling the auto paragraph
  * filters on content.
  *
- * TODO: 
+ * TODO:
  * ................................................................
- * Still needs to have the Layout Manager meta options for layout 
- * specific fields added. This includes the "Header", "Layout" and 
- * "Footer" options. We might also include "Skin" for these layout 
+ * Still needs to have the Layout Manager meta options for layout
+ * specific fields added. This includes the "Header", "Layout" and
+ * "Footer" options. We might also include "Skin" for these layout
  * specific meta options.
  * ................................................................
- * 
+ *
  */
 
 
 #-----------------------------------------------------------------
-# Custom Meta Fields 
+# Custom Meta Fields
 #-----------------------------------------------------------------
 
 
@@ -36,23 +36,23 @@ function theme_portfolio_meta_box_content_options () {
 	$footers = ( isset($layout_manager_admin) ) ? $layout_manager_admin->get_footers() : array();
 	$layouts = ( isset($layout_manager_admin) ) ? $layout_manager_admin->get_layouts() : array();
 
-	$header_layouts[] = __('- Select -', 'framework');
+	$header_layouts[] = __('- Select -', 'runway');
 	if(!empty($headers)) {
-		foreach ($headers as $key => $values) { 
+		foreach ($headers as $key => $values) {
 			$header_layouts[$values['alias']] = $values['title'];
 		}
 	}
 
-	$body_layouts[] = __('- Select -', 'framework');
+	$body_layouts[] = __('- Select -', 'runway');
 	if(!empty($layouts)) {
-		foreach ($layouts as $key => $values) { 
+		foreach ($layouts as $key => $values) {
 			$body_layouts[$values['alias']] = $values['title'];
 		}
 	}
 
-	$footer_layouts[] = __('- Select -', 'framework');
+	$footer_layouts[] = __('- Select -', 'runway');
 	if(!empty($footers)) {
-		foreach ($footers as $key => $values) { 
+		foreach ($footers as $key => $values) {
 			$footer_layouts[$values['alias']] = $values['title'];
 		}
 	}
@@ -72,7 +72,7 @@ function theme_portfolio_meta_box_content_options () {
 	$fields = array();
 	if(isset($layouts_manager->layouts_manager_options['settings']['headers']) && $layouts_manager->layouts_manager_options['settings']['headers'] == 'true') {
 		$fields[] = array(
-				'name' => __('Header', 'framework'),
+				'name' => __('Header', 'runway'),
 				'desc' => '',
 				'id' => 'header',
 				'type' => 'select',
@@ -81,8 +81,8 @@ function theme_portfolio_meta_box_content_options () {
 			);
 	}
 	$fields[] = array(
-		'name' => __('Body', 'framework'),
-		'desc' => (!isset($layouts_manager->layouts_manager_options['settings']['footers']) || $layouts_manager->layouts_manager_options['settings']['footers'] != 'true') ? __('Select custom layout options.', 'framework') : '',
+		'name' => __('Body', 'runway'),
+		'desc' => (!isset($layouts_manager->layouts_manager_options['settings']['footers']) || $layouts_manager->layouts_manager_options['settings']['footers'] != 'true') ? __('Select custom layout options.', 'runway') : '',
 		'id' => 'layout',
 		'type' => 'select',
 		'std' => '',
@@ -90,46 +90,46 @@ function theme_portfolio_meta_box_content_options () {
 	);
 	if(isset($layouts_manager->layouts_manager_options['settings']['footers']) && $layouts_manager->layouts_manager_options['settings']['footers'] == 'true') {
 		$fields[] = array(
-				'name' => __('Footer', 'framework'),
-				'desc' => __('Select custom layout options.', 'framework'),
+				'name' => __('Footer', 'runway'),
+				'desc' => __('Select custom layout options.', 'runway'),
 				'id' => 'footer',
 				'type' => 'select',
 				'std' => '',
 				'options' => $footer_layouts
 			);
 	}
-	
+
 	$fields[] = array(
-		'name' => __('Enable Auto Paragraphs', 'framework'),
-		'desc' => __('Add &lt;p&gt; and &lt;br&gt; tags automatically.<br>(disabling may fix layout issues)', 'framework'),
+		'name' => __('Enable Auto Paragraphs', 'runway'),
+		'desc' => __('Add &lt;p&gt; and &lt;br&gt; tags automatically.<br>(disabling may fix layout issues)', 'runway'),
 		'id' => 'wpautop',
 		'type' => 'select',
 		'std' => '',
 		'options' => array(
-			'default' => __('- Select -', 'framework'),
-			'on' => __('On', 'framework'),
-			'off' => __('Off', 'framework')
+			'default' => __('- Select -', 'runway'),
+			'on' => __('On', 'runway'),
+			'off' => __('Off', 'runway')
 		)
 	);
 	$fields[] = array(
-		'name' => __(' Hide Title', 'framework'),
-		'desc' => __('Hide the title for this page.', 'framework'),
+		'name' => __(' Hide Title', 'runway'),
+		'desc' => __('Hide the title for this page.', 'runway'),
 		'id' => 'hide_title',
 		'type' => 'checkbox',
 		'std' => ''
 	);
 	$fields[] = array(
-		'name' => __('Exclude from Search', 'framework'),
-		'desc' => __('Hide this page from search results.', 'framework'),
+		'name' => __('Exclude from Search', 'runway'),
+		'desc' => __('Hide this page from search results.', 'runway'),
 		'id' => 'search_exclude',
 		'type' => 'checkbox',
 		'std' => ''
 	);
-	
+
 	//(isset($layouts_manager->layouts_manager_options['settings']['headers']) && $layouts_manager->layouts_manager_options['settings']['headers'] == 'true')
 	$meta_box_content_options = array(
 		'id' => 'theme-meta-box-content-options',
-		'title' =>  __('Content Options', 'framework'),
+		'title' =>  __('Content Options', 'runway'),
 		'page' => $meta_postTypes,
 		'context' => 'side',
 		'priority' => 'default',
@@ -138,7 +138,7 @@ function theme_portfolio_meta_box_content_options () {
 
 	$postID = (isset($post)) ? $post->ID : 0; // NOTE: Shouldn't we refernece "GLOBAL" for the $post object?
 	$postType = (isset($post)) ? $post->post_type : "";
-	
+
 	$layout_alias = get_post_meta($postID, 'layout', true);
 	//if page has empty layout - find layout in parent pages
 	if($layout_alias === null || $layout_alias === false || $layout_alias === '') {
@@ -152,12 +152,12 @@ function theme_portfolio_meta_box_content_options () {
 			}
 		}
 	}
-	
+
 	if(!empty($layout_alias)) {
 		//get default values for layout
 		$optional_labels = ( isset($layout_manager_admin) ) ? $layout_manager_admin->get_optional_labels( $layout_alias , $postID, $postType) : array();
 		//get overrides for current post or page
-		$overrides_meta = get_post_meta($postID, 'overrides', true);	
+		$overrides_meta = get_post_meta($postID, 'overrides', true);
 		//check if current page has overrides and replace them into layout
 		if($overrides_meta != null && $overrides_meta != false &&
 				(is_array($overrides_meta) && count($overrides_meta) != 0)) {
@@ -168,14 +168,14 @@ function theme_portfolio_meta_box_content_options () {
 				}
 			}
 		}
-		
+
 		foreach( $optional_labels as $label_key => $label_value) {
 			$optional_label_type = ( isset($layout_manager_admin) ) ? $layout_manager_admin->get_content_elements($label_value['content_type']) : array();
 			if(!empty($optional_label_type)) {
 				$optional_label_layouts = array();
-				foreach ($optional_label_type as $key => $values) { 
+				foreach ($optional_label_type as $key => $values) {
 					$optional_label_layouts[$values['alias']] = $values['title'];
-				}		
+				}
 				$optional_label[] = array(
 							'name' => rf__($label_value['label']),
 							'desc' => '',
@@ -186,7 +186,7 @@ function theme_portfolio_meta_box_content_options () {
 							'selected' => $label_value['content_source'],
 							'data' => $label_key
 				);
-			}	
+			}
 		}
 	}
 
@@ -207,15 +207,15 @@ function theme_add_box_content_options($postType) {
 
 	$meta_box_content_options = theme_portfolio_meta_box_content_options();
 	$types = $meta_box_content_options['page'];
-	
+
 	if ( in_array($postType, $types) ) {
 
 		add_meta_box(
-			$meta_box_content_options['id'], 
-			$meta_box_content_options['title'], 
-			'theme_show_box_content_options', 
-			$postType, 
-			$meta_box_content_options['context'], 
+			$meta_box_content_options['id'],
+			$meta_box_content_options['title'],
+			'theme_show_box_content_options',
+			$postType,
+			$meta_box_content_options['context'],
 			$meta_box_content_options['priority']);
 	}
 }
@@ -251,7 +251,7 @@ function theme_show_box_content_options() {
 		$data = isset($field['data'])? 'data-index="'.$field['data'].'"' : '';
 		switch ($field['type']) {
 
-			// Select box		
+			// Select box
 			case 'select':
 				$style_select = (in_array($field['id'], array('header','footer','layout', 'optional_label'))) ? 'style="width:100%;"' : '';
 				echo '<div class="metaField_field_wrapper metaField_field_'.$field['id'].'" style="'.$style.'">',
@@ -266,9 +266,9 @@ function theme_show_box_content_options() {
 				echo '</select>';
 				if ($field['desc']) { echo '<p class="metaField_caption" style="color:#999">'.rf__($field['desc']).'</p>'; }
 				echo '</div>';
-			break;           
-			
-			// Radio group		
+			break;
+
+			// Radio group
 			case 'radio':
 				echo '<div class="metaField_field_wrapper metaField_field_'.$field['id'].'" style="'.$style.'">',
 				     '<p><label for="'.$field['id'].'"><strong>'.rf__($field['name']).'</strong></label></p>';
@@ -280,9 +280,9 @@ function theme_show_box_content_options() {
 				}
 				echo '<p class="metaField_caption" style="color:#999">'.rf__($field['desc']).'</p>',
 				     '</div>';
-			break;     
-			
-			// Checkbox 		
+			break;
+
+			// Checkbox
 			case 'checkbox':
 				$checked = ($meta) ? 'checked="checked"' : '';
 				echo '<div class="metaField_field_wrapper metaField_field_'.$field['id'].'" style="'.$style.'">',
@@ -294,7 +294,7 @@ function theme_show_box_content_options() {
 		}
 
 		$increment++;
-	} 
+	}
 }
 
 
@@ -315,20 +315,20 @@ function theme_save_data_content_options($post_id) {
 	foreach ($meta_box_content_options['fields'] as $field) {
 		$old = get_post_meta($post_id, $field['id'], true);
 		$new = (isset($_POST[$field['id']])) ? $_POST[$field['id']] : false;
- 
+
 		//if page has created - save default values
 		if (($new && $new != $old) || ($new === '0' && $new != $old && isset($_POST['save']) && !isset($_POST['publish']))) {
 			update_post_meta($post_id, $field['id'], stripslashes(htmlspecialchars($new)));
 		} elseif (('' == $new || '0' == $new) && $old) {
 			delete_post_meta($post_id, $field['id'], $old);
 		}
-	}	
+	}
 }
 add_action('save_post', 'theme_save_data_content_options');
 
 
 #-----------------------------------------------------------------
-# Search Exclude Filters 
+# Search Exclude Filters
 #-----------------------------------------------------------------
 
 if (!is_admin()) {
@@ -336,11 +336,11 @@ if (!is_admin()) {
 	if ( ! function_exists( 'filter_search_exclude' ) ) :
 		function filter_search_exclude($where = '') {
 			global $wpdb;
-			
+
 			// Meta values to look up
 			$meta_key = 'search_exclude';
 			$meta_value = '1';
-			
+
 			// Query DB for meta setting 'search-exclude = "Yes"'
 			$search_exclude_ids = $wpdb->get_col($wpdb->prepare("
 			SELECT      post_id
@@ -348,12 +348,12 @@ if (!is_admin()) {
 			WHERE       meta_key = %s
 			AND			meta_value = %s
 			ORDER BY    post_id ASC",
-					 $meta_key,$meta_value)); 
-						
+					 $meta_key,$meta_value));
+
 			if ( is_search() && $search_exclude_ids) {
-				
+
 				$exclude = $search_exclude_ids;
-	
+
 				for($x=0; $x < count($exclude); $x++){
 				  $where .= " AND ID != ".$exclude[$x];
 				}
@@ -365,12 +365,12 @@ if (!is_admin()) {
 }
 
 #-----------------------------------------------------------------
-# Disable Auto Paragraphs (wpautop) 
+# Disable Auto Paragraphs (wpautop)
 #-----------------------------------------------------------------
 
 // Global wpautop default
 //................................................................
-// Set default auto paragraph option. This value can be specified 
+// Set default auto paragraph option. This value can be specified
 // in theme's function.php using the same code below.
 
 if ( !defined( 'WPAUTOP_DEFAULT' ) )
@@ -382,24 +382,24 @@ if ( !defined( 'WPAUTOP_DEFAULT' ) )
 if ( ! function_exists( 'wpautop_control_filter' ) ) :
 	function wpautop_control_filter($content) {
 		global $post;
-		
-		// Check if a temporary $post reassignment is set. This lets the filter work on multiple content sources 
+
+		// Check if a temporary $post reassignment is set. This lets the filter work on multiple content sources
 		// in a single page by setting a temporary post object immediately before filters are applied. Basically
 		// a complicated way to pass $post->ID with a global variable since it can't be directly passed.
-		$the_post = ( isset($GLOBALS['wpautop_post']) ) ? $GLOBALS['wpautop_post'] : $post;  
-		
+		$the_post = ( isset($GLOBALS['wpautop_post']) ) ? $GLOBALS['wpautop_post'] : $post;
+
 		// Get wpautop setting
 		$remove_filter = (isset($the_post)) ? wpautop_disable($the_post->ID) : 0;
-		
+
 		// turn on/off
 		if ( $remove_filter ) {
 		  remove_filter('the_content', 'wpautop');
 		  remove_filter('the_excerpt', 'wpautop');
 		} else {
 		  add_filter('the_content', 'wpautop');
-		  add_filter('the_excerpt', 'wpautop');			
+		  add_filter('the_excerpt', 'wpautop');
 		}
-		
+
 		// destroy temporary items
 		unset($GLOBALS['wpautop_post']);
 		unset($the_post);
@@ -407,7 +407,7 @@ if ( ! function_exists( 'wpautop_control_filter' ) ) :
 		// return content
 		return $content;
 	}
-	
+
 	add_filter('the_content', 'wpautop_control_filter', 9);
 endif;
 
@@ -417,15 +417,15 @@ endif;
 if ( ! function_exists( 'wpautop_disable' ) ) :
 	function wpautop_disable($id = '') {
 		global $post;
-		
+
 		// Get the page/post meta setting
-		$post_wpautop_value =  strtolower(get_post_meta($id, 'wpautop', true)); 
-		
+		$post_wpautop_value =  strtolower(get_post_meta($id, 'wpautop', true));
+
 		// Global default setting
 		$default_wpautop_value = WPAUTOP_DEFAULT; // (true = autop is on)
-		
+
 		$remove_filter = false; // to match the WP default (false = enabled autop, true = disabled autop)
-		
+
 		// check if set at page level
 		if ( in_array($post_wpautop_value, array('true', 'on', 'yes')) ) {
 			$remove_filter = false;
@@ -435,7 +435,7 @@ if ( ! function_exists( 'wpautop_disable' ) ) :
 			// page/post level setting not found, use global setting
 			$remove_filter = ! $default_wpautop_value;
 		}
-		
+
 		return $remove_filter;
 	}
 endif;

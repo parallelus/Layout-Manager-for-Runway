@@ -2,19 +2,19 @@
 <form id="header-add-edit" action="<?php echo $this->self_url(); ?>&navigation=headers-list&action=update-header<?php echo isset($header) ? '&old_alias='.$header['alias'] : ''; ?>" method="post">
 	<?php require_once "header-form.php"; ?>
 	<input type="hidden" id="header-alias" value="<?php echo (isset($_GET['alias'])) ? $_GET['alias'] : ''; ?>">
-	<input class="button-primary" type="button" id="save-button" value="<?php _e('Save Settings', 'framework') ?>">
+	<input class="button-primary" type="button" id="save-button" value="<?php _e('Save Settings', 'runway') ?>">
 </form>
 <script type="text/javascript">
 	(function($){
 		$('.inside').css({'display': ''});
 
-		$('#save-button').click(function(e){			
+		$('#save-button').click(function(e){
 			var prefix = '<?php echo $shortname . "layout_header_"; ?>';
 			var headerTitle = $('#header-title').val().trim();
-			
+
 			if(headerTitle == ''){
 				$('#header-title').css('border-color', 'Red');
-			}			
+			}
 			else{
 				var header = $('#header-alias').val();
 				if(header == ''){

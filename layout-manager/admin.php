@@ -1,9 +1,9 @@
-<?php 
+<?php
 global $form_builder, $layouts_manager;
 
 if (IS_CHILD) {
 	$this->check_is_header_footer_rendered();
-	$this->view('header-footer-error', false, array('header_err'=> $this->header_err, 
+	$this->view('header-footer-error', false, array('header_err'=> $this->header_err,
 													'footer_err'=> $this->footer_err) );
 }
 
@@ -11,41 +11,41 @@ if (IS_CHILD) {
 $navText = array();
 switch ($this->navigation) {
 	case 'add-layout':
-		$navText = array(__( 'Add Layout', 'framework' ));
+		$navText = array(__( 'Add Layout', 'runway' ));
 		break;
 	case 'edit-layout':
-		$navText = array(__( 'Edit Layout', 'framework' ));
+		$navText = array(__( 'Edit Layout', 'runway' ));
 		break;
 	case 'headers-list':
 	case 'add-header':
 	case 'edit-header':
-		$navText = array(__( 'Headers', 'framework' ));
+		$navText = array(__( 'Headers', 'runway' ));
 		break;
 	case 'footers-list':
 	case 'add-footer':
 	case 'edit-footer':
-		$navText = array(__( 'Footers', 'framework' ));
+		$navText = array(__( 'Footers', 'runway' ));
 		break;
 	case 'settings':
-		$navText = array(__( 'Layout Settings', 'framework' ));
+		$navText = array(__( 'Layout Settings', 'runway' ));
 		break;
 	case 'options-list' || 'edit-options':
-		$parentNav = __( 'Options Fields', 'framework' );
+		$parentNav = __( 'Options Fields', 'runway' );
 		if (isset($_GET['option'])) {
 			$parentNav = '<a href="'.$this->self_url('options-list').'">'.$parentNav.'</a>';
-			if($_GET['option'] == 'headers')		
+			if($_GET['option'] == 'headers')
 				$navText = array(
 					$parentNav,
-					__( 'Headers', 'framework' )
+					__( 'Headers', 'runway' )
 				);
-			if($_GET['option'] == 'footers')		
+			if($_GET['option'] == 'footers')
 				$navText = array(
 					$parentNav,
-					__( 'Footers', 'framework' ));
-			if($_GET['option'] == 'other-options')		
+					__( 'Footers', 'runway' ));
+			if($_GET['option'] == 'other-options')
 				$navText = array(
 					$parentNav,
-					__( 'Layout', 'framework' )
+					__( 'Layout', 'runway' )
 				);
 
 		} else {
@@ -63,20 +63,20 @@ if (!empty($navText)) {
 // Begin tabs
 if(!in_array($this->navigation, array('add-layout', 'edit-layout', 'add-header', 'add-footer', 'edit-options'))): ?>
 	<h2 class="nav-tab-wrapper tab-controlls" style="padding-top: 9px;">
-		<a href="<?php echo $this->self_url(); ?>" class="nav-tab <?php if($this->navigation == '' || $this->navigation == 'duplicate-layout') {echo "nav-tab-active";} ?>"><?php _e('Layouts', 'framework') ?></a>
+		<a href="<?php echo $this->self_url(); ?>" class="nav-tab <?php if($this->navigation == '' || $this->navigation == 'duplicate-layout') {echo "nav-tab-active";} ?>"><?php _e('Layouts', 'runway') ?></a>
 		<?php if(isset($this->layouts_manager_options['settings']['headers']) ): ?>
-			<a href="<?php echo $this->self_url('headers-list'); ?>" class="nav-tab <?php if($this->navigation == 'headers-list' || $this->navigation == 'edit-header') {echo "nav-tab-active";} ?>"><?php _e('Headers', 'framework') ?></a>
-		<?php endif; ?>	
+			<a href="<?php echo $this->self_url('headers-list'); ?>" class="nav-tab <?php if($this->navigation == 'headers-list' || $this->navigation == 'edit-header') {echo "nav-tab-active";} ?>"><?php _e('Headers', 'runway') ?></a>
+		<?php endif; ?>
 		<?php if(isset($this->layouts_manager_options['settings']['footers']) ): ?>
-			<a href="<?php echo $this->self_url('footers-list'); ?>" class="nav-tab <?php if($this->navigation == 'footers-list' || $this->navigation == 'edit-footer') {echo "nav-tab-active";} ?>"><?php _e('Footers', 'framework') ?></a>
-		<?php endif; ?>	
+			<a href="<?php echo $this->self_url('footers-list'); ?>" class="nav-tab <?php if($this->navigation == 'footers-list' || $this->navigation == 'edit-footer') {echo "nav-tab-active";} ?>"><?php _e('Footers', 'runway') ?></a>
+		<?php endif; ?>
 		<?php if (IS_CHILD && get_template() == 'runway-framework'): ?>
-			<a href="<?php echo $this->self_url('settings'); ?>" class="nav-tab <?php if($this->navigation == 'settings') {echo "nav-tab-active";} ?>"><?php _e('Settings', 'framework') ?></a>						
-			<?php if(isset($this->layouts_manager_options['settings']['headers']) || 
-					isset($this->layouts_manager_options['settings']['footers']) || 
+			<a href="<?php echo $this->self_url('settings'); ?>" class="nav-tab <?php if($this->navigation == 'settings') {echo "nav-tab-active";} ?>"><?php _e('Settings', 'runway') ?></a>
+			<?php if(isset($this->layouts_manager_options['settings']['headers']) ||
+					isset($this->layouts_manager_options['settings']['footers']) ||
 					isset($this->layouts_manager_options['settings']['other-options'])
 				): ?>
-				<a href="<?php echo $this->self_url('options-list'); ?>" class="nav-tab <?php if($this->navigation == 'options-list') {echo "nav-tab-active";} ?>"><?php _e('Custom Fields', 'framework') ?></a>
+				<a href="<?php echo $this->self_url('options-list'); ?>" class="nav-tab <?php if($this->navigation == 'options-list') {echo "nav-tab-active";} ?>"><?php _e('Custom Fields', 'runway') ?></a>
 			<?php endif; ?>
 		<?php endif; ?>
 	</h2>
@@ -94,19 +94,19 @@ echo '<script type="text/javascript">layoutAlias = "'. $js_alias .'";</script>';
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
 
 if($action != ''){
-	switch ($action) {	
+	switch ($action) {
 
 		case 'update-contexts':{
 			$options = isset($_REQUEST['options']) ? $_REQUEST['options'] : '';
 			if($options != ''){
 				$this->update_contexts($options);
 			}
-		} break; 
+		} break;
 
 		case 'update-header':{
 			$title = isset($_REQUEST['header-title']) ? $_REQUEST['header-title'] : '';
-			$alias = isset($_REQUEST['old_alias']) ? $_REQUEST['old_alias'] : sanitize_title($_REQUEST['header-title']);			
-			
+			$alias = isset($_REQUEST['old_alias']) ? $_REQUEST['old_alias'] : sanitize_title($_REQUEST['header-title']);
+
 			$custom_options = $form_builder->get_custom_options_vals('layout_header_'.$alias, true);
 
 			if($title != '' && $alias != ''){
@@ -118,7 +118,7 @@ if($action != ''){
 				$this->update_header($options);
 			}
 		} break;
-		
+
 		case 'delete-header':{
 			$alias = isset($_REQUEST['alias']) ? sanitize_title($_REQUEST['alias']) : '';
 			if($alias != ''){
@@ -134,15 +134,15 @@ if($action != ''){
 
 		case 'update-footer':{
 			$title = isset($_REQUEST['footer-title']) ? $_REQUEST['footer-title'] : '';
-			$alias = isset($_REQUEST['old_alias']) ? $_REQUEST['old_alias'] : sanitize_title($_REQUEST['footer-title']);			
-						
+			$alias = isset($_REQUEST['old_alias']) ? $_REQUEST['old_alias'] : sanitize_title($_REQUEST['footer-title']);
+
 			$custom_options = $form_builder->get_custom_options_vals('layout_footer_'.$alias, true);
 
 			if($title != '' && $alias != ''){
 				$options = array(
 					'title' => $title,
 					'alias' => $alias,
-					'custom_options' => $custom_options,					
+					'custom_options' => $custom_options,
 				);
 				$this->update_footer($options);
 			}
@@ -171,23 +171,23 @@ if($action != ''){
 }
 
 
-// Load the specific area 
+// Load the specific area
 switch ($this->navigation) {
 	case 'add-layout':{
 		$headers = $this->get_headers();
 		$footers = $this->get_footers();
-		$skins   = $this->get_skin_css();		
+		$skins   = $this->get_skin_css();
 
 		$layout = array(
-            'title' => __( 'New Layout', 'framework' ),
+            'title' => __( 'New Layout', 'runway' ),
             'alias' => 'layout-' . time(),
         );
 
 		require_once('views/add-edit-layout.php');
 	} break;
 
-	case 'edit-layout':{	
-		
+	case 'edit-layout':{
+
 		// TODO: save other options us layout options
 
 		$headers = $this->get_headers();
@@ -196,15 +196,15 @@ switch ($this->navigation) {
 
 		$headers = stripslashes_deep($headers);
 		$footers = stripslashes_deep($footers);
-                    
+
         $this->enqueue_wp_editor_scripts();
-                
+
 		require_once('views/add-edit-layout.php');
 	} break;
 
 	case 'duplicate-layout': {
 		$this->duplicate_layout($_POST['duplicated_alias'], $_POST['duplicated_name']);
-		
+
 		$layouts  = $this->get_layouts();
 		$contexts = $this->get_contexts();
 		require_once('views/layouts-list.php');
@@ -246,7 +246,7 @@ switch ($this->navigation) {
 
 	case 'confirm-delete-header':{
 		$item_confirm = 'header';
-		$header_confirm = $layouts_manager->get_header($alias);	
+		$header_confirm = $layouts_manager->get_header($alias);
 		$item_title = $header_confirm['title'];
 		$action_url_yes = admin_url('themes.php?page=layout-manager&navigation=headers-list&action=delete-header&alias='.$alias);
 		$action_url_no = admin_url('themes.php?page=layout-manager&navigation=headers-list');
@@ -259,12 +259,12 @@ switch ($this->navigation) {
 		if(!empty($footers)){
 			foreach($footers as $key => $values) {
 				$values['title'] = stripslashes($values['title']);
-				$footers[$key] = $values;	
+				$footers[$key] = $values;
 			}
 		}
-		
+
 		require_once('views/footers-list.php');
-	} break;	
+	} break;
 
 	case 'add-footer':{
 		require_once('views/add-edit-footer.php');
@@ -281,7 +281,7 @@ switch ($this->navigation) {
 
 	case 'confirm-delete-footer':{
 		$item_confirm = 'footer';
-		$footer_confirm = $layouts_manager->get_footer($alias);	
+		$footer_confirm = $layouts_manager->get_footer($alias);
 		$item_title = $footer_confirm['title'];
 		$action_url_yes = admin_url('themes.php?page=layout-manager&navigation=footers-list&action=delete-footer&alias='.$alias);
 		$action_url_no = admin_url('themes.php?page=layout-manager&navigation=footers-list');
@@ -293,7 +293,7 @@ switch ($this->navigation) {
 		$this->view('settings', false, array('settings' => isset( $this->layouts_manager_options['settings'] ) ? $this->layouts_manager_options['settings'] : ''));
 	} break;
 
-	case 'edit-options':{		
+	case 'edit-options':{
 		$this->view('edit-options');
 	} break;
 
@@ -301,11 +301,11 @@ switch ($this->navigation) {
 		$this->view('options-list');
 	} break;
 
-	default:{ 
+	default:{
 		$layouts  = $this->get_layouts();
 		$contexts = $this->get_contexts();
 		require_once('views/layouts-list.php');
 	}
-}  
+}
 
 ?>

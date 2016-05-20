@@ -5,21 +5,21 @@
 		<table class="wp-list-table widefat layouts-list-sortable" style="width: auto; min-width: 50%;">
 			<thead>
 				<tr>
-					<th id="field-name" class="manage-column column-name"><?php _e('Title', 'framework') ?></th>
-					<th id="field-header" class="manage-column column-header"><?php _e('Header', 'framework') ?></th>
-					<th id="field-footer" class="manage-column column-footer"><?php _e('Footer', 'framework') ?></th>
+					<th id="field-name" class="manage-column column-name"><?php _e('Title', 'runway') ?></th>
+					<th id="field-header" class="manage-column column-header"><?php _e('Header', 'runway') ?></th>
+					<th id="field-footer" class="manage-column column-footer"><?php _e('Footer', 'runway') ?></th>
 					<th id="field-controls" class="manage-column column-controls" style="text-align:right;">&nbsp;</th>
 				</tr>
 			</thead>
 			<tbody id="the-list">
-				<?php 
+				<?php
 				$count = 0;
 				foreach ($layouts as $key => $values):
 					$trClass = ($count % 2 == 0) ? 'active alt' : 'active';
 					?>
 					<tr class="<?php echo $trClass ?>" data-sort-alias="<?php echo $values['alias']; ?>">
 						<td class="column-name">
-							<a href="<?php echo $this->self_url('edit-layout'); ?>&alias=<?php echo $values['alias']; ?>"><strong><?php echo __(stripslashes($values['title']), 'framework'); ?></strong></a>
+							<a href="<?php echo $this->self_url('edit-layout'); ?>&alias=<?php echo $values['alias']; ?>"><strong><?php echo __(stripslashes($values['title']), 'runway'); ?></strong></a>
 						</td>
 						<td class="column-header">
 							<?php echo !empty($values['header'])? $values['header'] : ''; ?>
@@ -28,12 +28,12 @@
 							<?php echo !empty($values['footer'])? $values['footer'] : ''; ?>
 						</td>
 						<td class="column-controls" style="text-align:right;">
-							<a href="<?php echo $this->self_url('edit-layout'); ?>&alias=<?php echo $values['alias']; ?>"><?php _e('Edit', 'framework') ?></a> | 
-							<a href="#" class="duplicate_layout" data-alias="<?php echo $values['alias']; ?>"><?php _e('Duplicate', 'framework'); ?></a> | 
-							<a style="color: #BC0B0B;" href="<?php echo $this->self_url(); ?>&navigation=confirm-delete-layout&alias=<?php echo $values['alias']; ?>"><?php _e('Delete', 'framework') ?></a>
+							<a href="<?php echo $this->self_url('edit-layout'); ?>&alias=<?php echo $values['alias']; ?>"><?php _e('Edit', 'runway') ?></a> |
+							<a href="#" class="duplicate_layout" data-alias="<?php echo $values['alias']; ?>"><?php _e('Duplicate', 'runway'); ?></a> |
+							<a style="color: #BC0B0B;" href="<?php echo $this->self_url(); ?>&navigation=confirm-delete-layout&alias=<?php echo $values['alias']; ?>"><?php _e('Delete', 'runway') ?></a>
 						</td>
 					</tr>
-					<?php 
+					<?php
 					$count++;
 				endforeach; ?>
 			</tbody>
@@ -41,16 +41,16 @@
 		<div style="display: none;" class="duplicate_layout_dialog">
 			<form action="<?php echo $this->self_url('duplicate-layout'); ?>" method="post">
 				<input type="hidden" name="duplicated_alias" class="duplicated_alias"/>
-				
-				<label for="duplicated_name"><?php _e('Enter new layout title', 'framework'); ?>: </label>
+
+				<label for="duplicated_name"><?php _e('Enter new layout title', 'runway'); ?>: </label>
 				<input type="text" value="" name="duplicated_name"/>
-				
-				<input type="submit" value="<?php _e('Duplicate', 'framework'); ?>"/>
+
+				<input type="submit" value="<?php _e('Duplicate', 'runway'); ?>"/>
 			</form>
 		</div>
 		<div style="display: none;" class="save-layouts-sort">
 			<p>
-				<input class="button-primary" value="<?php echo __('Save Layouts Order', 'framework'); ?>">
+				<input class="button-primary" value="<?php echo __('Save Layouts Order', 'runway'); ?>">
 			</p>
 		</div>
 
@@ -66,22 +66,22 @@
 
 			// Defaults
 			$default_contexts = array(
-				'default' => array( 'name' => __('Default', 'framework'), 'description' => __('The default layout used when a layout is not assigned.', 'framework') ),
-				'home'    => array( 'name' => __('Home Page', 'framework'), 'description' => __('The home page layout.', 'framework') ),
-				'page'    => array( 'name' => __('Page', 'framework'), 'description' => __('Page layout.', 'framework') ),
-				'post'    => array( 'name' => __('Single Post', 'framework'), 'description' => __('Single Post layout.', 'framework') ),
-				'blog'    => array( 'name' => __('Blog', 'framework'), 'description' => __('The blog post list layout.', 'framework') ),
-				// 'category' => array( 'name' => __('Category', 'framework'), 'description' => __('Optional', 'framework') ),
-				// 'author'   => array( 'name' => __('Author', 'framework'), 'description' => __('Optional', 'framework') ),
-				// 'tag'      => array( 'name' => __('Tag', 'framework'), 'description' => __('Optional', 'framework') ),
-				// 'date'     => array( 'name' => __('Date', 'framework'), 'description' => __('Optional', 'framework') ),
-				'search'  => array( 'name' => __('Search', 'framework'), 'description' => __('Search results layout.', 'framework') ),
-				'error'   => array( 'name' => __('Error', 'framework'), 'description' => __('404 error page layout.', 'framework') ),
+				'default' => array( 'name' => __('Default', 'runway'), 'description' => __('The default layout used when a layout is not assigned.', 'runway') ),
+				'home'    => array( 'name' => __('Home Page', 'runway'), 'description' => __('The home page layout.', 'runway') ),
+				'page'    => array( 'name' => __('Page', 'runway'), 'description' => __('Page layout.', 'runway') ),
+				'post'    => array( 'name' => __('Single Post', 'runway'), 'description' => __('Single Post layout.', 'runway') ),
+				'blog'    => array( 'name' => __('Blog', 'runway'), 'description' => __('The blog post list layout.', 'runway') ),
+				// 'category' => array( 'name' => __('Category', 'runway'), 'description' => __('Optional', 'runway') ),
+				// 'author'   => array( 'name' => __('Author', 'runway'), 'description' => __('Optional', 'runway') ),
+				// 'tag'      => array( 'name' => __('Tag', 'runway'), 'description' => __('Optional', 'runway') ),
+				// 'date'     => array( 'name' => __('Date', 'runway'), 'description' => __('Optional', 'runway') ),
+				'search'  => array( 'name' => __('Search', 'runway'), 'description' => __('Search results layout.', 'runway') ),
+				'error'   => array( 'name' => __('Error', 'runway'), 'description' => __('404 error page layout.', 'runway') ),
 			);
 
 			$default_context_list = array_keys($default_contexts); // get keys for comparison with other lists
 
-			// More contexts can be registered using the "register_context()" function 
+			// More contexts can be registered using the "register_context()" function
 			// For reference see the function notes in 'template-functions/template-engine.php'
 
 			// These are some contexts that might be in the theme or reason just needs to be restricted to prevent naming conflicts
@@ -96,13 +96,13 @@
 			// ---------------------------------------
 
 			if ( !empty($default_contexts) ) {
-				
-				echo '<div class="hr"></div> <br> <h3>'. __('Defaults', 'framework') .'</h3>';
-				echo '<p>' . __('Layouts for the default areas of your site.', 'framework') . '</p>';
+
+				echo '<div class="hr"></div> <br> <h3>'. __('Defaults', 'runway') .'</h3>';
+				echo '<p>' . __('Layouts for the default areas of your site.', 'runway') . '</p>';
 				echo '<table class="form-table">';
 
 				foreach ($default_contexts as $context => $details) {
-					
+
 					// Skip anything that might be a duplicate of a default
 					if (!in_array($context, $ignore_context_list) && $context) {
 
@@ -141,12 +141,12 @@
 
 			if ( !empty($manual_context_list) ) {
 
-				echo '<br> <div class="hr"></div> <br> <h3>'. __('Registered Templates', 'framework') .'</h3>';
-				echo '<p>' . __('Additional layout assignments can be registered manually using the <code>register_context()</code> function. When registered they will appear in this area. ', 'framework') . '</p>';
+				echo '<br> <div class="hr"></div> <br> <h3>'. __('Registered Templates', 'runway') .'</h3>';
+				echo '<p>' . __('Additional layout assignments can be registered manually using the <code>register_context()</code> function. When registered they will appear in this area. ', 'runway') . '</p>';
 				echo '<table class="form-table">';
 
 				foreach ($manual_context_list as $context => $name) {
-					
+
 					// Skip anything that might be a duplicate of a default
 					if (!in_array($context, $default_context_list) && !in_array($context, $ignore_context_list) && $context) {
 
@@ -159,7 +159,7 @@
 							<td>
 								<select class="input-select" name="options[<?php echo $context ?>]">
 									<option value=""></option>
-									<?php foreach ($layouts as $key => $values): 
+									<?php foreach ($layouts as $key => $values):
 										$selected = '';
 										if ( !empty($contexts) && isset($contexts[$context]) && $values['alias'] == $contexts[$context])
 											$selected = 'selected="selected"';
@@ -186,11 +186,11 @@
 
 			if ( !empty($auto_context_list) ) {
 
-				echo '<br> <div class="hr"></div> <br> <h3>'. __('Custom Post Types (auto generated)', 'framework') .'</h3>';
+				echo '<br> <div class="hr"></div> <br> <h3>'. __('Custom Post Types (auto generated)', 'runway') .'</h3>';
 				echo '<table class="form-table">';
 
 				foreach ($auto_context_list as $context => $name) {
-					
+
 					// Skip anything that might be a duplicate of a default
 					if (!in_array($context, $default_context_list) && !in_array($context, $ignore_context_list) && $context) {
 
@@ -203,7 +203,7 @@
 							<td>
 								<select class="input-select" name="options[<?php echo $context ?>]">
 									<option value=""></option>
-									<?php foreach ($layouts as $key => $values): 
+									<?php foreach ($layouts as $key => $values):
 										$selected = '';
 										if ( !empty($contexts) && isset($contexts[$context]) && $values['alias'] == $contexts[$context])
 											$selected = 'selected="selected"';
@@ -222,7 +222,7 @@
 
 			<br>
 			<p>
-				<input class="button-primary" type="submit" value="<?php echo __('Save Settings', 'framework'); ?>">
+				<input class="button-primary" type="submit" value="<?php echo __('Save Settings', 'runway'); ?>">
 			</p>
 			<br>
 
@@ -230,12 +230,12 @@
 			<a name="register_custom_template_file"></a>
 			<div class="meta-box-sortables metabox-holder">
 				<div class="postbox">
-					<div class="handlediv" title="<?php _e('Click to toggle', 'framework'); ?>"><br></div>						
-					<h3 class="postbox-title"><span><?php _e('Register Custom Template Files', 'framework'); ?></span></h3>
+					<div class="handlediv" title="<?php _e('Click to toggle', 'runway'); ?>"><br></div>
+					<h3 class="postbox-title"><span><?php _e('Register Custom Template Files', 'runway'); ?></span></h3>
 					<div class="inside" >
 						<?php
-						echo '<p>' . __('To manually register a template file you can use the <code>register_context()</code> function. To do this add an entry to your <code>functions.php</code> file.', 'framework') . '</p>';
-						echo '<p>' . __('Below is an example usage of how you might register a custom layout for a "news" category file. After you create a category with the slug "news" and add a file to the theme folder named <code>category-news.php</code> you would copy the following to your <code>functions.php</code> file.', 'framework') . '</p>';
+						echo '<p>' . __('To manually register a template file you can use the <code>register_context()</code> function. To do this add an entry to your <code>functions.php</code> file.', 'runway') . '</p>';
+						echo '<p>' . __('Below is an example usage of how you might register a custom layout for a "news" category file. After you create a category with the slug "news" and add a file to the theme folder named <code>category-news.php</code> you would copy the following to your <code>functions.php</code> file.', 'runway') . '</p>';
 						echo '<pre class="code" style="background: #F3F3F3; color: #333; padding: 10px; font-size: 11px; border: 1px solid #EAEAEA;">'.
 							 '// Register custom template file for layout settings'. PHP_EOL .
 							 '// -------------------------------------------------'. PHP_EOL .
@@ -243,7 +243,7 @@
 							 '$news_template = locate_template(\'category-news.php\'); // returns full path of file in theme folder'. PHP_EOL .
 							 'register_context( \'News Category\', \'category_news\', $news_template); // $name, $context, $template_file</pre>';
 
-						?>									
+						?>
 					</div>
 				</div>
 			</div>
@@ -252,7 +252,7 @@
 		</form>
 
 <?php else: ?>
-<h3><?php _e('You have not created any layouts yet.', 'framework'); ?></h3>
+<h3><?php _e('You have not created any layouts yet.', 'runway'); ?></h3>
 <?php endif; ?>
 
 	</div> <!-- / #post-body-content -->

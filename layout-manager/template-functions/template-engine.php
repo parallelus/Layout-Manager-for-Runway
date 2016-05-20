@@ -33,10 +33,10 @@ if ( ! function_exists( 'template_context' ) ) :
 		elseif ( is_comments_popup()	)	: $context = 'comments';
 		elseif ( is_paged()				)	: $context = 'paged';
 		else :
-			// Something nice to add here might be a feature that makes association 
+			// Something nice to add here might be a feature that makes association
 			// between template files and a custom $context. A user could assign
 			// these associations from the WP admin options? Just a thought.
-		
+
 			// Set the default
 			$context = 'default';
 		endif;
@@ -75,10 +75,10 @@ endif;
 //................................................................
 
 /*
-	BuddyPress is it's own animal and uses the "template_redirect" 
+	BuddyPress is it's own animal and uses the "template_redirect"
 	for getting the template files to load. Because of this, we
-	manage it independent of all other "template_include" filters 
-	and overrides. 
+	manage it independent of all other "template_include" filters
+	and overrides.
 */
 
 if ( ! function_exists( 'bp_template_context' ) ) :
@@ -135,7 +135,7 @@ if ( ! function_exists( 'bp_template_context' ) ) :
 		//................................................................
 
 		// Give plugins and theme functions a chance to modify the $context
-		$context = apply_filters( 'template_context', $context, $template );	
+		$context = apply_filters( 'template_context', $context, $template );
 
 		// Last chance to edit the values of $template and $context
 		$template = apply_filters( 'theme_template_file', $template );
@@ -170,8 +170,8 @@ endif;
 *	@param string $return_val - When a function is used for $file_or_function, this specifies if the return value is the 'context' or 'bool' (true/false) to use the supplied context when registered
 *	@return bool - Will return false if any errors or required variables are not supplied
 *
-*	Example usage: 
-*	
+*	Example usage:
+*
 *		$news_template = locate_template('category-news.php'); // provides full path to files in theme folder
 *		register_context( 'News Category', 'news_category', $news_template);
 */
@@ -198,7 +198,7 @@ if ( ! function_exists( 'register_context' ) ) :
 
 		if ($file || $function) {
 			if (!$name) $name = $context;
-			$register_context[$priority][$name] = array( 
+			$register_context[$priority][$name] = array(
 				'file' => $file,
 				'function' => $function,
 				'context' => $context,
@@ -207,7 +207,7 @@ if ( ! function_exists( 'register_context' ) ) :
 			if ($auto_CPT) {
 				// These are generated automatically by the theme and may not actually have a public facing page so we manage them seperate.
 				$master_context_list['auto'][$context] = $name;
-			} else {	
+			} else {
 				// add context to the list (for admin purposes)
 				$master_context_list['manual'][$context] = $name;
 			}
@@ -227,15 +227,15 @@ endif;
 //................................................................
 /**
 *
-*	When a $context is registered using the "register_context()" function it stores the data to the global $register_context 
-*	variable. When the function "template_context()" determines which context to use from the defaults, it needs to also check 
-*	against the list of registered contexts. These can include auto-registered custom post types, custom user registered and 
-*	some other custom registrations included by the theme. After the default $context values are checked, we apply a filter to 
-*	the "template_context()" function to run "apply_registered_context()" which tests for a registered context/template and 
-*	updates the $context values of the "template_context()" function before executing the design files. 
+*	When a $context is registered using the "register_context()" function it stores the data to the global $register_context
+*	variable. When the function "template_context()" determines which context to use from the defaults, it needs to also check
+*	against the list of registered contexts. These can include auto-registered custom post types, custom user registered and
+*	some other custom registrations included by the theme. After the default $context values are checked, we apply a filter to
+*	the "template_context()" function to run "apply_registered_context()" which tests for a registered context/template and
+*	updates the $context values of the "template_context()" function before executing the design files.
 *
 *	@param string $context - The context.
-*	@param string $template - The template file 
+*	@param string $template - The template file
 *
 */
 if ( ! function_exists( 'apply_registered_context' ) ) :
@@ -292,9 +292,9 @@ endif;
 // Auto-register all Categories
 // -----------------------------------------------------------------
 /**
- * This looks up the WP category and calls the "register_context()" 
- * function. It verifies the loaded page with a function instead of 
- * specifying a template file as the method of knowing when to apply 
+ * This looks up the WP category and calls the "register_context()"
+ * function. It verifies the loaded page with a function instead of
+ * specifying a template file as the method of knowing when to apply
  * the custom context.
  */
 if ( ! function_exists( 'auto_register_wp_category_context' ) ) :
@@ -304,18 +304,18 @@ if ( ! function_exists( 'auto_register_wp_category_context' ) ) :
 
 		foreach ( $category_ids as $cat_id ) {
 			$cat_name = get_cat_name($cat_id);
-			register_context( "<strong>".__('Category', 'framework').": </strong>".esc_attr($cat_name), 'category-'.$cat_id, 'verify_wp_category_context');
+			register_context( "<strong>".__('Category', 'runway').": </strong>".esc_attr($cat_name), 'category-'.$cat_id, 'verify_wp_category_context');
 		}
 	}
-	
+
 	// Apply filters
 	add_action( 'wp_loaded', 'auto_register_wp_category_context' );
 endif;
 
 /**
- * Called by the "register_context()" function to verify the current 
- * page meets the requirements of a registered context and if so, 
- * returns the $context value. 
+ * Called by the "register_context()" function to verify the current
+ * page meets the requirements of a registered context and if so,
+ * returns the $context value.
  */
 if ( ! function_exists( 'verify_wp_category_context' ) ) :
 	function verify_wp_category_context($context, $template, $values) {
@@ -336,8 +336,8 @@ endif;
 // Auto-register custom post types
 // -----------------------------------------------------------------
 /**
-*	Finds and registers any public custom post types that are not WP 
-*	defaults or "_builtin" 
+*	Finds and registers any public custom post types that are not WP
+*	defaults or "_builtin"
 */
 
 // Register custom post types ($context)
@@ -352,10 +352,10 @@ if ( ! function_exists( 'auto_register_custom_post_type_context' ) ) :
 		$args = array(
 		  'public'   => true,
 		  '_builtin' => false
-		); 
+		);
 		$output = 'objects'; // names or objects, 'names' is the default
 		$operator = 'and'; // 'and' or 'or'
-		$post_types = get_post_types($args,$output,$operator); 
+		$post_types = get_post_types($args,$output,$operator);
 
 		foreach ($post_types as $post_type ) {
 			if ( function_exists('is_woocommerce') && $post_type->name == 'product') {
@@ -365,7 +365,7 @@ if ( ! function_exists( 'auto_register_custom_post_type_context' ) ) :
 			register_context( $post_type->labels->name, $post_type->name, 'verify_post_type_context');
 		}
 	}
-	
+
 	// Apply filters
 	add_action( 'wp_loaded', 'auto_register_custom_post_type_context' );
 endif;
@@ -373,12 +373,12 @@ endif;
 // Applies context when detecting a custom post types
 //................................................................
 /**
- * This function is called by the "register_context()" function 
- * (instead of a template file) to verify if the currently loaded 
- * page is one that meets the requirements of a registered context 
- * (CPT). It tests the current page to see if the "$post_type->name" 
- * value matches a registered $context and if so, returns the 
- * $context value. 
+ * This function is called by the "register_context()" function
+ * (instead of a template file) to verify if the currently loaded
+ * page is one that meets the requirements of a registered context
+ * (CPT). It tests the current page to see if the "$post_type->name"
+ * value matches a registered $context and if so, returns the
+ * $context value.
  */
 if ( ! function_exists( 'verify_post_type_context' ) ) :
 	function verify_post_type_context($context, $template, $values) {
@@ -403,24 +403,24 @@ if ( ! function_exists( 'auto_register_woocommerce_context' ) ) :
 		global $register_context;
 
 		// Default
-		register_context( "<strong>".__('WooCommerce', 'framework').": </strong>".__('Default', 'framework'), 'woocommerce-default', 'verify_woocommerce_context');
+		register_context( "<strong>".__('WooCommerce', 'runway').": </strong>".__('Default', 'runway'), 'woocommerce-default', 'verify_woocommerce_context');
 		// Home
-		register_context( "<strong>".__('WooCommerce', 'framework').": </strong>".__('Home', 'framework'), 'woocommerce-home', 'verify_woocommerce_context');
+		register_context( "<strong>".__('WooCommerce', 'runway').": </strong>".__('Home', 'runway'), 'woocommerce-home', 'verify_woocommerce_context');
 		// Product
-		register_context( "<strong>".__('WooCommerce', 'framework').": </strong>".__('Product', 'framework'), 'woocommerce-product', 'verify_woocommerce_context');
+		register_context( "<strong>".__('WooCommerce', 'runway').": </strong>".__('Product', 'runway'), 'woocommerce-product', 'verify_woocommerce_context');
 		// Category
-		register_context( "<strong>".__('WooCommerce', 'framework').": </strong>".__('Category', 'framework'), 'woocommerce-category', 'verify_woocommerce_context');
+		register_context( "<strong>".__('WooCommerce', 'runway').": </strong>".__('Category', 'runway'), 'woocommerce-category', 'verify_woocommerce_context');
 		// Tag
-		register_context( "<strong>".__('WooCommerce', 'framework').": </strong>".__('Tag', 'framework'), 'woocommerce-tag', 'verify_woocommerce_context');
+		register_context( "<strong>".__('WooCommerce', 'runway').": </strong>".__('Tag', 'runway'), 'woocommerce-tag', 'verify_woocommerce_context');
 		// Cart
-		register_context( "<strong>".__('WooCommerce', 'framework').": </strong>".__('Cart', 'framework'), 'woocommerce-cart', 'verify_woocommerce_context');
+		register_context( "<strong>".__('WooCommerce', 'runway').": </strong>".__('Cart', 'runway'), 'woocommerce-cart', 'verify_woocommerce_context');
 		// Checkout
-		register_context( "<strong>".__('WooCommerce', 'framework').": </strong>".__('Checkout', 'framework'), 'woocommerce-checkout', 'verify_woocommerce_context');
+		register_context( "<strong>".__('WooCommerce', 'runway').": </strong>".__('Checkout', 'runway'), 'woocommerce-checkout', 'verify_woocommerce_context');
 		// Account
-		register_context( "<strong>".__('WooCommerce', 'framework').": </strong>".__('Account', 'framework'), 'woocommerce-account', 'verify_woocommerce_context');
+		register_context( "<strong>".__('WooCommerce', 'runway').": </strong>".__('Account', 'runway'), 'woocommerce-account', 'verify_woocommerce_context');
 
 	}
-	
+
 	// called only after woocommerce has finished loading
     add_action( 'woocommerce_init', 'auto_register_woocommerce_context' );
 endif;
@@ -440,7 +440,7 @@ if ( ! function_exists( 'verify_woocommerce_context' ) ) :
 				( is_cart() && $values['context'] == 'woocommerce-cart' ) ||
 				( is_checkout() && $values['context'] == 'woocommerce-checkout' ) ||
 				( is_account_page() && $values['context'] == 'woocommerce-account' )
-			) 
+			)
 		{
 			$layout = context_cascade($values['context']);
 		}

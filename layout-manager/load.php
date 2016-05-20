@@ -16,7 +16,7 @@ $fields = array(
 $default = array();
 
 $settings = array(
-	'name' => __('Layout Manager', 'framework'),
+	'name' => __('Layout Manager', 'runway'),
 	'option_key' => $shortname.'layouts_manager',
 	'fields' => $fields,
 	'default' => $default,
@@ -126,13 +126,13 @@ function title_button_new_layout( $title ) {
 	$navigation = (isset($_GET['navigation'])) ? $_GET['navigation'] : '';
 
 	if ( $page == 'layout-manager' && $navigation == 'headers-list' ) {
-		$title .= ' <a href="?page=layout-manager&navigation=add-header" class="add-new-h2">'. __( 'Add New Header', 'framework' ) .'</a>';
+		$title .= ' <a href="?page=layout-manager&navigation=add-header" class="add-new-h2">'. __( 'Add New Header', 'runway' ) .'</a>';
 	} elseif ( $page == 'layout-manager' && $navigation == 'footers-list' ) {
-		$title .= ' <a href="?page=layout-manager&navigation=add-footer" class="add-new-h2">'. __( 'Add New Footer', 'framework' ) .'</a>';
+		$title .= ' <a href="?page=layout-manager&navigation=add-footer" class="add-new-h2">'. __( 'Add New Footer', 'runway' ) .'</a>';
 	} elseif (IS_CHILD && get_template() == 'runway-framework' && $page == 'layout-manager' && in_array( $navigation, array('add-layout', 'edit-layout', 'add-header', 'edit-header', 'add-footer', 'edit-footer'))) {
-		$title .= ' <a href="#" title="'. __( 'Show or hide the developer information.', 'framework' ) .'" class="add-new-h2" id="ToggleDevMode">'. __( 'Toggle Developer Info', 'framework' ) .'</a>';
+		$title .= ' <a href="#" title="'. __( 'Show or hide the developer information.', 'runway' ) .'" class="add-new-h2" id="ToggleDevMode">'. __( 'Toggle Developer Info', 'runway' ) .'</a>';
 	} elseif ( $page == 'layout-manager' && !in_array($navigation, array('add-header', 'edit-header', 'add-footer', 'edit-footer', 'settings', 'options-list'))) {
-		$title .= ' <a href="?page=layout-manager&navigation=add-layout" class="add-new-h2">'. __( 'Add New Layout', 'framework' ) .'</a>';
+		$title .= ' <a href="?page=layout-manager&navigation=add-layout" class="add-new-h2">'. __( 'Add New Layout', 'runway' ) .'</a>';
 	}
 
 	return $title;
@@ -152,16 +152,16 @@ function layouts_manager_report($reports_object){
 		'source' => 'Layouts Manager',
 		'report_key' => 'layouts_dir_exists',
 		'path' => $layouts_dir,
-		'success_message' => __('Layouts dir', 'framework') . ' (' . $layouts_dir . ') ' . __('is exists', 'framework') . '.',
-		'fail_message' => __('Layouts dir', 'framework') . ' (' . $layouts_dir . ') ' . __('is not exists', 'framework') . '.',
+		'success_message' => __('Layouts dir', 'runway') . ' (' . $layouts_dir . ') ' . __('is exists', 'runway') . '.',
+		'fail_message' => __('Layouts dir', 'runway') . ' (' . $layouts_dir . ') ' . __('is not exists', 'runway') . '.',
 	), 'DIR_EXISTS' );
 
 	$reports_object->assign_report(array(
 		'source' => 'Layouts Manager',
 		'report_key' => 'layouts_dir_writable',
 		'path' => $layouts_dir,
-		'success_message' => __('Layouts dir', 'framework') . ' (' . $layouts_dir . ') ' . __('is writable', 'framework') . '.',
-		'fail_message' => __('Layouts dir', 'framework') . ' (' . $layouts_dir . ') ' . __('is not writable', 'framework') . '.',
+		'success_message' => __('Layouts dir', 'runway') . ' (' . $layouts_dir . ') ' . __('is writable', 'runway') . '.',
+		'fail_message' => __('Layouts dir', 'runway') . ' (' . $layouts_dir . ') ' . __('is not writable', 'runway') . '.',
 	), 'IS_WRITABLE' );
 }
 
