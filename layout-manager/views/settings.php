@@ -219,11 +219,11 @@
                                     ?>
 					<tr class="">
 						<th scope="row" valign="top">
-							<?php _e(ucfirst($custom_post_type_label), 'runway') ?>
+							<?php echo sprintf( __('%s', 'runway'), ucfirst($custom_post_type_label) ); ?>
 							<p class="description required"><?php //_e('Required', 'runway') ?></p>
 						</th>
 						<td>
-							<label><input class="input-check" type="checkbox" value="true" name="content-source-<?php echo $key; ?>" <?php echo (isset($settings["content-source-$key"]) && $settings["content-source-$key"] == 'true') ? 'checked' : ''; ?>> <?php echo __('Enable', 'runway'); ?> <?php echo __(ucfirst($custom_post_type_label), 'runway'); ?></label>
+							<label><input class="input-check" type="checkbox" value="true" name="content-source-<?php echo $key; ?>" <?php echo (isset($settings["content-source-$key"]) && $settings["content-source-$key"] == 'true') ? 'checked' : ''; ?>> <?php echo __('Enable', 'runway'); ?> <?php echo sprintf( __('%s', 'runway'), ucfirst($custom_post_type_label) ); ?></label>
 						</td>
 					</tr>
 				<?php endforeach ?>

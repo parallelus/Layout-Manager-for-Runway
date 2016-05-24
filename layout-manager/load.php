@@ -152,16 +152,16 @@ function layouts_manager_report($reports_object){
 		'source' => 'Layouts Manager',
 		'report_key' => 'layouts_dir_exists',
 		'path' => $layouts_dir,
-		'success_message' => __('Layouts dir', 'runway') . ' (' . $layouts_dir . ') ' . __('is exists', 'runway') . '.',
-		'fail_message' => __('Layouts dir', 'runway') . ' (' . $layouts_dir . ') ' . __('is not exists', 'runway') . '.',
+		'success_message' => sprintf( __('Layouts dir (%s) is exists.', 'runway'), $layouts_dir ),
+		'fail_message' => sprintf( __('Layouts dir (%s) is not exists.', 'runway'), $layouts_dir ),
 	), 'DIR_EXISTS' );
 
 	$reports_object->assign_report(array(
 		'source' => 'Layouts Manager',
 		'report_key' => 'layouts_dir_writable',
 		'path' => $layouts_dir,
-		'success_message' => __('Layouts dir', 'runway') . ' (' . $layouts_dir . ') ' . __('is writable', 'runway') . '.',
-		'fail_message' => __('Layouts dir', 'runway') . ' (' . $layouts_dir . ') ' . __('is not writable', 'runway') . '.',
+		'success_message' => sprintf( __('Layouts dir (%s) is writable.', 'runway'), $layouts_dir ),
+		'fail_message' => sprintf( __('Layouts dir (%s) is not writable.', 'runway'), $layouts_dir ),
 	), 'IS_WRITABLE' );
 }
 

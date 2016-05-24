@@ -19,7 +19,7 @@
 					?>
 					<tr class="<?php echo $trClass ?>" data-sort-alias="<?php echo $values['alias']; ?>">
 						<td class="column-name">
-							<a href="<?php echo $this->self_url('edit-layout'); ?>&alias=<?php echo $values['alias']; ?>"><strong><?php echo __(stripslashes($values['title']), 'runway'); ?></strong></a>
+							<a href="<?php echo $this->self_url('edit-layout'); ?>&alias=<?php echo $values['alias']; ?>"><strong><?php echo sprintf( __('%s', 'runway'), stripslashes($values['title']) ); ?></strong></a>
 						</td>
 						<td class="column-header">
 							<?php echo !empty($values['header'])? $values['header'] : ''; ?>

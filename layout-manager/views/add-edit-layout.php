@@ -39,7 +39,7 @@
 										$selected = 'selected="selected"';
 									} ?>
 									<option value="<?php echo $value['alias']; ?>" <?php echo $selected; ?> >
-										<?php echo __(stripslashes($value['title']), 'runway'); ?>
+										<?php echo sprintf( __('%s', 'runway'), stripslashes($value['title']) ); ?>
 									</option>
 								<?php endforeach; ?>
 							</select>
@@ -89,7 +89,7 @@
 										$selected = 'selected="selected"';
 									} ?>
 									<option value="<?php echo $value['alias']; ?>" <?php echo $selected; ?> >
-										<?php echo __(stripslashes($value['title']), 'runway'); ?>
+										<?php echo sprintf( __('%s', 'runway'), stripslashes($value['title']) ); ?>
 									</option>
 								<?php endforeach; ?>
 							</select>
@@ -150,7 +150,7 @@
 										if(count($custom_posts[$key]) > 0) {
 											if( isset($layouts_manager->layouts_manager_options['settings']["content-source-$key"]) &&
 											 		  $layouts_manager->layouts_manager_options['settings']["content-source-$key"] == true ): ?>
-												<option value="<?php echo $key; ?>"><?php _e(ucfirst($custom_post_type_label), 'runway') ?></option>
+												<option value="<?php echo $key; ?>"><?php echo sprintf( __('%s', 'runway'), ucfirst($custom_post_type_label) ); ?></option>
 											<?php endif ?>
 										<?php }
 									} ?>
@@ -231,7 +231,7 @@
 							if(count($custom_posts[$key]) > 0) {
 								if( isset($layouts_manager->layouts_manager_options['settings']["content-source-$key"]) &&
 								 		  $layouts_manager->layouts_manager_options['settings']["content-source-$key"] == true ): ?>
-									<option value="<?php echo $key; ?>"><?php _e(ucfirst($custom_post_type_label), 'runway') ?></option>
+									<option value="<?php echo $key; ?>"><?php echo sprintf( __('%s', 'runway'), ucfirst($custom_post_type_label) ); ?></option>
 								<?php endif ?>
 							<?php }
 						} ?>
@@ -254,7 +254,7 @@
 							if(count($custom_posts[$key]) > 0) {
 								if( isset($layouts_manager->layouts_manager_options['settings']["content-source-$key"]) &&
 								 		  $layouts_manager->layouts_manager_options['settings']["content-source-$key"] == true ): ?>
-									<span class="description-<?php echo $key; ?>"><?php _e("Choose a $custom_post_type_label from as the content source.", 'runway') ?></span>
+									<span class="description-<?php echo $key; ?>"><?php echo sprintf( __("Choose a %s from as the content source.", 'runway'), $custom_post_type_label ); ?></span>
 								<?php endif ?>
 							<?php }
 						} ?>
