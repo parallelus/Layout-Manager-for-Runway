@@ -1,23 +1,26 @@
 <?php global $shortname; ?>
-<form id="header-add-edit" action="<?php echo $this->self_url(); ?>&navigation=headers-list&action=update-header<?php echo isset($header) ? '&old_alias='.$header['alias'] : ''; ?>" method="post">
+<form id="header-add-edit"
+      action="<?php echo $this->self_url(); ?>&navigation=headers-list&action=update-header<?php echo isset( $header ) ? '&old_alias=' . $header['alias'] : ''; ?>"
+      method="post">
 	<?php require_once "header-form.php"; ?>
-	<input type="hidden" id="header-alias" value="<?php echo (isset($_GET['alias'])) ? $_GET['alias'] : ''; ?>">
-	<input class="button-primary" type="button" id="save-button" value="<?php _e('Save Settings', 'runway') ?>">
+	<input type="hidden" id="header-alias" value="<?php echo ( isset( $_GET['alias'] ) ) ? $_GET['alias'] : ''; ?>">
+	<input class="button-primary" type="button" id="save-button" value="<?php _e( 'Save Settings', 'runway' ) ?>">
 </form>
 <script type="text/javascript">
-	(function($){
+	(function ($) {
 		$('.inside').css({'display': ''});
 
-		$('#save-button').click(function(e){
+		$('#save-button').click(function (e) {
 			var prefix = '<?php echo $shortname . "layout_header_"; ?>';
 			var headerTitle = $('#header-title').val().trim();
 
-			if(headerTitle == ''){
+			if (headerTitle == '') {
 				$('#header-title').css('border-color', 'Red');
 			}
-			else{
+			else {
 				var header = $('#header-alias').val();
-				if(header == ''){
+				
+				if (header == '') {
 					$.ajax({
 						url: ajaxurl,
 						async: false,
@@ -25,14 +28,14 @@
 							action: 'sanitize_title',
 							string: headerTitle
 						}
-					}).done(function(responce){
-						header = responce;
+					}).done(function (response) {
+						header = response;
 						$('#header-alias').val(header);
 					});
 				}
 
-				console.log(prefix+header);
-				save_custom_options(header, prefix+header, 'header');
+				console.log(prefix + header);
+				save_custom_options(header, prefix + header, 'header');
 				$('#header-add-edit').submit();
 			}
 		});
