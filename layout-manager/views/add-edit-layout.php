@@ -131,7 +131,7 @@ $custom_post_types = get_post_types( array( '_builtin' => false ), 'object' );
 					<div class="rowWrapper">
 						<div class="rowContainer"></div><!-- / .rowContainer -->
 						<div class="handle rowHandle"></div>
-						<a href="#close" tabindex="2" class="delete-row ui-dialog-titlebar-close"
+						<a href="#close" tabindex="2" class="delete-row"
 						   title="<?php _e( 'Delete Row', 'runway' ); ?>" role="button">
 							<span class="ui-icon ui-icon-closethick">close</span>
 						</a>
@@ -151,14 +151,14 @@ $custom_post_types = get_post_types( array( '_builtin' => false ), 'object' );
 							   title="<?php _e( 'Visible on Tablet', 'runway' ); ?>"></a>
 							<a href="#phone" id="phone" class="responsive-visibility show-on phone-view"
 							   title="<?php _e( 'Visible on Phone', 'runway' ); ?>"></a>
-							<a href="#close" class="delete-column ui-dialog-titlebar-close" tabindex="2"
+							<a href="#close" class="delete-column" tabindex="2"
 							   title="<?php _e( 'Delete Column', 'runway' ); ?>" role="button">
 								<span class="ui-icon ui-icon-closethick">close</span>
 							</a>
 						</div>
 						<div class="content-element">
 							<div class="handle"></div>
-								<a href="#close" class="delete-element ui-dialog-titlebar-close" tabindex="2"
+								<a href="#close" class="delete-element" tabindex="2"
 								   title="<?php _e( 'Delete Cell', 'runway' ); ?>" role="button">
 									<span class="ui-icon ui-icon-closethick">close</span>
 								</a>
@@ -264,7 +264,7 @@ $custom_post_types = get_post_types( array( '_builtin' => false ), 'object' );
 						   title="<?php _e( 'Visible on Tablet', 'runway' ); ?>"></a>
 						<a href="#phone" id="phone" class="responsive-visibility show-on phone-view"
 						   title="<?php _e( 'Visible on Phone', 'runway' ); ?>"></a>
-						<a href="#close" class="delete-column ui-dialog-titlebar-close" tabindex="2"
+						<a href="#close" class="delete-column" tabindex="2"
 						   title="<?php _e( 'Delete Column', 'runway' ); ?>" role="button">
 							<span class="ui-icon ui-icon-closethick">close</span>
 						</a>
@@ -278,7 +278,7 @@ $custom_post_types = get_post_types( array( '_builtin' => false ), 'object' );
 			<div id="OnlyContentElementTemplate">
 				<div class="content-element">
 				<div class="handle"></div>
-					<a href="#close" class="delete-element ui-dialog-titlebar-close" tabindex="2"
+					<a href="#close" class="delete-element" tabindex="2"
 					   title="<?php _e( 'Delete Cell', 'runway' ); ?>" role="button">
 						<span class="ui-icon ui-icon-closethick">close</span>
 					</a>
