@@ -346,7 +346,7 @@ function generate_content_layout( $position = 'start', $layout = false, $context
 		// the header and footer display of the layout
 		$contentBreak = false;
 
-		if ( is_array( $layout['body_structure'] ) ) {
+		if ( array_key_exists( 'body_structure',  $layout ) && is_array( $layout['body_structure'] ) ) {
 
 			// Do we print the information yet?
 			$output = false;
