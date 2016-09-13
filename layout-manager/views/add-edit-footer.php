@@ -1,43 +1,17 @@
-<?php global $shortname; ?>
+<?php
+global $shortname;
+
+wp_enqueue_script( 'layout-edit-footer', FRAMEWORK_URL . 'extensions/layout-manager/js/layout-edit-footer.js', array(
+	'jquery'
+), '', true );
+wp_localize_script( 'layout-edit-footer', 'layout_footer_data', array(
+	'prefix' => $shortname . 'layout_footer_'
+) );
+?>
 <form id="footer-add-edit"
       action="<?php echo $this->self_url(); ?>&navigation=footers-list&action=update-footer<?php echo isset( $footer ) ? '&old_alias=' . $footer['alias'] : ''; ?>"
       method="post">
 	<input type="hidden" id="footer-alias" value="<?php echo isset( $_GET['alias'] ) ? $_GET['alias'] : ''; ?>">
-	<?php require_once "footer-form.php"; ?>
+	<?php require_once __DIR__ . '/footer-form.php'; ?>
 	<input class="button-primary" type="button" id="save-button" value="<?php _e( 'Save Settings', 'runway' ) ?>">
 </form>
-<script type="text/javascript">
-	(function ($) {
-		$('.inside').css({'display': ''});
-
-		$('#save-button').click(function (e) {
-
-			var footerTitle = $('#footer-title').val().trim();
-			var prefix = '<?php echo $shortname . "layout_footer_"; ?>';
-
-			if (footerTitle == '') {
-				$('#footer-title').css('border-color', 'Red');
-			} else {
-				var footer = $('#footer-alias').val();
-
-				if (footer == '') {
-					$.ajax({
-						url: ajaxurl,
-						async: false,
-						data: {
-							action: 'sanitize_title',
-							string: footerTitle
-						}
-					}).done(function (response) {
-						footer = response;
-						$('#footer-alias').val(footer);
-					});
-				}
-
-				save_custom_options(footer, prefix + footer, 'footer');
-				$('#footer-add-edit').submit();
-			}
-		});
-
-	})(jQuery);
-</script>
