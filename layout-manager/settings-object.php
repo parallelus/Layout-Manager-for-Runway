@@ -104,19 +104,28 @@ class Layout_Manager_Admin_Object extends Runway_Admin_Object {
 		$footer_func      = "do_action('output_layout','end')";
 		$this->header_err = $this->footer_err = false;
 
-		if ( ! function_exists( 'WP_Filesystem' ) ) {
-			require_once( ABSPATH . 'wp-admin/includes/file.php' );
+		if ( function_exists( 'get_runway_wp_filesystem' ) ) {
+			$wp_filesystem = get_runway_wp_filesystem();
+		} else {
+			if ( ! function_exists( 'WP_Filesystem' ) ) {
+				require_once( ABSPATH . 'wp-admin/includes/file.php' );
+			}
+
+			WP_Filesystem();
+			global $wp_filesystem;
 		}
-		WP_Filesystem();
-		global $wp_filesystem;
 
 		if ( file_exists( $path_to_theme . '/header.php' ) ) {
-			$header_data      = $wp_filesystem->get_contents( $path_to_theme . '/header.php' );
+			$header_data      = $wp_filesystem->get_contents(
+				apply_filters( 'rf_prepared_path', $path_to_theme . '/header.php' )
+			);
 			$this->header_err = ( strpos( $header_data, $header_func ) === false ) ? true : false;
 		}
 
 		if ( file_exists( $path_to_theme . '/footer.php' ) ) {
-			$footer_data      = $wp_filesystem->get_contents( $path_to_theme . '/footer.php' );
+			$footer_data      = $wp_filesystem->get_contents(
+				apply_filters( 'rf_prepared_path', $path_to_theme . '/footer.php'  )
+			);
 			$this->footer_err = ( strpos( $footer_data, $footer_func ) === false ) ? true : false;
 		}
 
@@ -222,14 +231,22 @@ class Layout_Manager_Admin_Object extends Runway_Admin_Object {
 
 		if ( $layout_alias != null ) {
 			if ( IS_CHILD && get_template() == 'runway-framework' ) {
-				if ( ! function_exists( 'WP_Filesystem' ) ) {
-					require_once( ABSPATH . 'wp-admin/includes/file.php' );
+				if ( function_exists( 'get_runway_wp_filesystem' ) ) {
+					$wp_filesystem = get_runway_wp_filesystem();
+				} else {
+					if ( ! function_exists( 'WP_Filesystem' ) ) {
+						require_once( ABSPATH . 'wp-admin/includes/file.php' );
+					}
+
+					WP_Filesystem();
+					global $wp_filesystem;
 				}
-				WP_Filesystem();
-				global $wp_filesystem;
 
 				$file_name = $this->layouts_manager_options['layouts'][ $layout_alias ]['alias'] . '.json';
-				if ( $wp_filesystem->put_contents( $this->layouts_path . $file_name, json_encode( $this->layouts_manager_options['layouts'][ $layout_alias ] ) ) ) {
+				if ( $wp_filesystem->put_contents(
+					apply_filters( 'rf_prepared_path', $this->layouts_path . $file_name ),
+					json_encode( $this->layouts_manager_options['layouts'][ $layout_alias ] )
+				) ) {
 					return true;
 				} else {
 					return false;
