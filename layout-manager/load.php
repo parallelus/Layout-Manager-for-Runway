@@ -2,7 +2,7 @@
 /*
 	Extension Name: Layout Manager
 	Extension URI: https://github.com/parallelus/Layout-Manager-for-Runway
-	Version: 0.9.5
+	Version: 0.9.6
 	Description: Build advanced WordPress templates with drag and drop controls.
 	Author: Parallelus
 	Author URI: http://runwaywp.com
