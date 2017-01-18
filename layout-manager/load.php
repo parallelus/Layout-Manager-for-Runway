@@ -122,19 +122,22 @@ if ( is_admin() ) {
 
 	$layout_manager_admin = new Layout_Manager_Admin_Object( $settings );
 	add_action( 'admin_enqueue_scripts', 'wp_enqueue_media' );
-	add_action( 'admin_enqueue_scripts', 'add_optional_label' );
+	add_action( 'admin_enqueue_scripts', 'enqueue_layouts_scripts_and_styles' );
 
 }
 
-function add_optional_label( $hook = '' ) {
+function enqueue_layouts_scripts_and_styles( $hook = '' ) {
 
 	// Only load on Layout Manager
 	if ( $hook == 'appearance_page_layout-manager' ) {
+		wp_enqueue_script( 'layouts_helper', FRAMEWORK_URL . 'extensions/layout-manager/js/layout-helper.js', array( 'jquery' ) );
+		wp_localize_script( 'layouts_helper', 'LayoutManagerHelper', array(
+			'builder_nonce' => wp_create_nonce( 'options-builder' ),
+			'optional_label_nonce' => wp_create_nonce( 'optional-label-nonce' )
+		) );
+
 		wp_enqueue_style( 'style', FRAMEWORK_URL . 'extensions/layout-manager/css/admin-styles.css' );
 		wp_enqueue_script( 'optional_label', FRAMEWORK_URL . 'extensions/layout-manager/js/optional-label.js', array( 'jquery' ) );
-		wp_localize_script( 'optional_label', 'OptionalLabel', array(
-			'nonce' => wp_create_nonce( 'optional-label-nonce' )
-		) );
 	}
 
 }

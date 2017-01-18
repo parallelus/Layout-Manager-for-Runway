@@ -88,7 +88,7 @@ jQuery( document ).ready(function( $ ) {
 						source: source,
 						post_ID: post_ID,
 						index: $(this).data('index'),
-						nonce: OptionalLabel.nonce
+						nonce: LayoutManagerHelper.optional_label_nonce
 					}
 				}).done(function(response){	
 					$('#publish').trigger( "click" );
