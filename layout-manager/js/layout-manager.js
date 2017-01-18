@@ -2,6 +2,7 @@
 	var prefix_header = $('#prefix_header').val();
 	var prefix_footer = $('#prefix_footer').val();
 	var prefix_other = $('#prefix_other').val();
+	var nonce = $('#update-layout-nonce').val();
 
 	function reloadSelect(select, data) {
 		select.empty();
@@ -288,6 +289,7 @@
 				data = {
 					action: 'update_header',
 					title: $('input[name="header_title"]').val(),
+					nonce: nonce
 				};
 				
 				if( ! is_new_header )
@@ -305,6 +307,10 @@
 						$('select[name="header_select"]').val(header_alias);
 						$('#none_header').last().attr("id", header_alias);
 					}
+
+					if (typeof response == 'object' && typeof response.success !== 'undefined' && !response.success) {
+						document.location = '?page=layout-manager&navigation=edit-layout&alias=' + $('#layout_alias').val();
+					}
 				});				
 			}
 
@@ -313,6 +319,7 @@
 				data = {
 					action: 'update_footer',
 					title: $('input[name="footer_title"]').val(),
+					nonce: nonce
 					};
 				if( ! is_new_footer )
 					data.alias = $('select[name="footer_select"]').val();
@@ -329,6 +336,10 @@
 						$('select[name="footer_select"]').val(footer_alias);
 						$('#none_footer').last().attr("id", footer_alias);
 					}
+
+					if (typeof response == 'object' && typeof response.success !== 'undefined' && !response.success) {
+						document.location = '?page=layout-manager&navigation=edit-layout&alias=' + $('#layout_alias').val();
+					}
 				});
 			}
 
@@ -340,6 +351,7 @@
 					header: header_alias,
 					footer: footer_alias,
 					body_structure: layout,
+					nonce: nonce
 			};
 
 			$.ajax({
@@ -347,16 +359,18 @@
 				async:false,
 				data: data
 			}).done(function(response){
-				// Save custom options
-				if($.trim($('input[name="header_title"]').val()) != ''){
-					save_custom_options(header_alias, prefix_header+header_alias, 'header');
+				if (typeof response !== 'object' || (typeof response.success !== 'undefined' && !response.success)) {
+					// Save custom options
+					if($.trim($('input[name="header_title"]').val()) != ''){
+						save_custom_options(header_alias, prefix_header+header_alias, 'header');
+					}
+	
+					if($.trim($('input[name="footer_title"]').val()) != ''){
+						save_custom_options(footer_alias, prefix_footer+footer_alias, 'footer');
+					}
+						
+					save_custom_options('other_options', prefix_other+$('#layout_alias').val(), 'other_options');
 				}
-
-				if($.trim($('input[name="footer_title"]').val()) != ''){
-					save_custom_options(footer_alias, prefix_footer+footer_alias, 'footer');
-				}
-				
-				save_custom_options('other_options', prefix_other+$('#layout_alias').val(), 'other_options');
 
 				document.location = '?page=layout-manager&navigation=edit-layout&alias=' + $('#layout_alias').val();				
 			});
@@ -469,32 +483,41 @@
 			var data = {
 				action: 'update_header',
 				title: $('input[name="header_title"]').val(),
+				nonce: nonce
 			};
 		
 			if(action == 'EditHeader'){
 				data.alias = $('select[name="header_select"]').val();
 
 				$.post(ajaxurl, data, function(response){					
-					updateHeaderSelect();
-					$('select[name="header_select"]').val(data.alias);
-					$('#HeaderWrapper').find('.spinner').fadeOut(100);
+					if (typeof response == 'object' && typeof response.success !== 'undefined' && !response.success) {
+						document.location = '?page=layout-manager&navigation=edit-layout&alias=' + $('#layout_alias').val();
+					} else {
+						updateHeaderSelect();
+						$('select[name="header_select"]').val(data.alias);
+						$('#HeaderWrapper').find('.spinner').fadeOut(100);
 
-					var header_alias = $("select[name='header_select']").val();
-					save_custom_options(header_alias, prefix_header+header_alias, 'header');
+						var header_alias = $("select[name='header_select']").val();
+						save_custom_options(header_alias, prefix_header+header_alias, 'header');
+					}
 				});
 			}
 			else if(action == 'AddHeader'){
 				$.post(ajaxurl, data, function(response){
-					updateHeaderSelect();
+					if (typeof response == 'object' && typeof response.success !== 'undefined' && !response.success) {
+						document.location = '?page=layout-manager&navigation=edit-layout&alias=' + $('#layout_alias').val();
+					} else {
+						updateHeaderSelect();
 
-					// TODO: Update value to show new header selected
-					alias = data.title.replace(/\s+/g, '-').toLowerCase(); // this is weak, lowercasing and spaces to dashes won't always work
-					alias = alias.replace(/'/g, "");
-					$('select[name="header_select"]').val(alias);
-					$('#HeaderWrapper').find('.spinner').fadeOut(100);
+						// TODO: Update value to show new header selected
+						alias = data.title.replace(/\s+/g, '-').toLowerCase(); // this is weak, lowercasing and spaces to dashes won't always work
+						alias = alias.replace(/'/g, "");
+						$('select[name="header_select"]').val(alias);
+						$('#HeaderWrapper').find('.spinner').fadeOut(100);
 
-					$('#none_header').attr("id", alias);                // needs to save custom fields
-					save_custom_options(alias, prefix_header+alias, 'header'); 
+						$('#none_header').attr("id", alias);                // needs to save custom fields
+						save_custom_options(alias, prefix_header+alias, 'header');
+					}
 				});
 			}
 		}
@@ -537,32 +560,41 @@
 				title: $('input[name="footer_title"]').val(),
 				footer_top_content: $('#footer-top-content').val(),
 				footer_bottom_content: $('#footer-bottom-content').val(),
+				nonce: nonce
 			};
 		
 			if(action == 'EditFooter'){
 				data.alias = $('select[name="footer_select"]').val();
 
 				$.post(ajaxurl, data, function(response){					
-					updateFootersSelect();
-					$('select[name="footer_select"]').val(data.alias);
-					$('#FooterWrapper').find('.spinner').fadeOut(100);
+					if (typeof response == 'object' && typeof response.success !== 'undefined' && !response.success) {
+						document.location = '?page=layout-manager&navigation=edit-layout&alias=' + $('#layout_alias').val();
+					} else {
+						updateFootersSelect();
+						$('select[name="footer_select"]').val(data.alias);
+						$('#FooterWrapper').find('.spinner').fadeOut(100);
 
-					var footer_alias = $("select[name='footer_select']").val();
-					save_custom_options(footer_alias, prefix_footer+footer_alias, 'footer');					
+						var footer_alias = $("select[name='footer_select']").val();
+						save_custom_options(footer_alias, prefix_footer+footer_alias, 'footer');
+					}					
 				});
 			}
 			else if(action == 'AddFooter'){
 				$.post(ajaxurl, data, function(response){
-					updateFootersSelect();
+					if (typeof response == 'object' && typeof response.success !== 'undefined' && !response.success) {
+						document.location = '?page=layout-manager&navigation=edit-layout&alias=' + $('#layout_alias').val();
+					} else {
+						updateFootersSelect();
 
-					// TODO: Update value to show new footer selected
-					alias = data.title.replace(/\s+/g, '-').toLowerCase(); // this is weak, lowercasing and spaces to dashes won't always work
-					alias = alias.replace(/'/g, "");					
-					$('select[name="footer_select"]').val(alias);
-					$('#FooterWrapper').find('.spinner').fadeOut(100);
+						// TODO: Update value to show new footer selected
+						alias = data.title.replace(/\s+/g, '-').toLowerCase(); // this is weak, lowercasing and spaces to dashes won't always work
+						alias = alias.replace(/'/g, "");
+						$('select[name="footer_select"]').val(alias);
+						$('#FooterWrapper').find('.spinner').fadeOut(100);
 
-					$('#none_footer').attr("id", alias);                // needs to save custom fields
-					save_custom_options(alias, prefix_footer+alias, 'footer'); 
+						$('#none_footer').attr("id", alias);                // needs to save custom fields
+						save_custom_options(alias, prefix_footer+alias, 'footer');
+					}
 				});
 			}
 		}

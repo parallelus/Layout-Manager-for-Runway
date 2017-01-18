@@ -29,7 +29,7 @@ $settings = array(
 		'formsbuilder',
 		'ace',
 		'rw_nouislider',
-		'tiny_mce',
+		//'tiny_mce',
 		'editor',
 		FRAMEWORK_URL . 'extensions/layout-manager/js/jquery-ui-1.10.1.custom.min.js',
 		FRAMEWORK_URL . 'extensions/layout-manager/js/layout-builder-plugin.js',
@@ -132,6 +132,9 @@ function add_optional_label( $hook = '' ) {
 	if ( $hook == 'appearance_page_layout-manager' ) {
 		wp_enqueue_style( 'style', FRAMEWORK_URL . 'extensions/layout-manager/css/admin-styles.css' );
 		wp_enqueue_script( 'optional_label', FRAMEWORK_URL . 'extensions/layout-manager/js/optional-label.js', array( 'jquery' ) );
+		wp_localize_script( 'optional_label', 'OptionalLabel', array(
+			'nonce' => wp_create_nonce( 'optional-label-nonce' )
+		) );
 	}
 
 }

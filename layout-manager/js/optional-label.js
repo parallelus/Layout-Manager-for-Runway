@@ -87,7 +87,8 @@ jQuery( document ).ready(function( $ ) {
 						alias: alias,
 						source: source,
 						post_ID: post_ID,
-						index: $(this).data('index')
+						index: $(this).data('index'),
+						nonce: OptionalLabel.nonce
 					}
 				}).done(function(response){	
 					$('#publish').trigger( "click" );

@@ -52,6 +52,8 @@
 
 			<div style="display: none;" class="duplicate_layout_dialog">
 				<form action="<?php echo $this->self_url( 'duplicate-layout' ); ?>" method="post">
+					<?php wp_nonce_field( 'duplicate-layout-nonce' ,'duplicate-layout-nonce' ); ?>
+
 					<input type="hidden" name="duplicated_alias" class="duplicated_alias"/>
 
 					<label for="duplicated_name"><?php _e( 'Enter new layout title', 'runway' ); ?>: </label>
@@ -61,6 +63,7 @@
 				</form>
 			</div>
 			<div style="display: none;" class="save-layouts-sort">
+				<?php wp_nonce_field( 'save-layouts-sort-nonce', 'save-layouts-sort-nonce' ); ?>
 				<p>
 					<input class="button-primary" value="<?php echo __( 'Save Layouts Order', 'runway' ); ?>">
 				</p>
@@ -71,6 +74,7 @@
 			<form action="<?php echo $this->self_url(); ?>&action=update-contexts" method="post">
 
 				<?php
+				wp_nonce_field( 'update-contexts-nonce', 'update-contexts-nonce' );
 
 				// ==========================================
 				// Layout Contexts

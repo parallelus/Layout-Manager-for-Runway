@@ -1,6 +1,7 @@
 <?php
 global $shortname;
 $custom_post_types = get_post_types( array( '_builtin' => false ), 'object' );
+wp_nonce_field( 'update-layout-nonce' ,'update-layout-nonce' );
 ?>
 
 <div id="poststuff">

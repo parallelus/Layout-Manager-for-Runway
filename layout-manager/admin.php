@@ -145,6 +145,8 @@ $action = isset( $_REQUEST['action'] ) ? $_REQUEST['action'] : '';
 if ( $action != '' ) {
 	switch ( $action ) {
 		case 'update-contexts':
+			check_admin_referer( 'update-contexts-nonce', 'update-contexts-nonce' );
+
 			$options = isset( $_REQUEST['options'] ) ? $_REQUEST['options'] : '';
 			if ( $options != '' ) {
 				$this->update_contexts( $options );
@@ -153,6 +155,8 @@ if ( $action != '' ) {
 			break;
 
 		case 'update-header':
+			check_admin_referer( 'update-header-nonce', 'update-header-nonce' );
+
 			$title = isset( $_REQUEST['header-title'] ) ? $_REQUEST['header-title'] : '';
 			$alias = isset( $_REQUEST['old_alias'] ) ? $_REQUEST['old_alias'] : sanitize_title( $_REQUEST['header-title'] );
 
@@ -170,6 +174,8 @@ if ( $action != '' ) {
 			break;
 
 		case 'delete-header':
+			check_admin_referer( 'delete-header' );
+
 			$alias = isset( $_REQUEST['alias'] ) ? sanitize_title( $_REQUEST['alias'] ) : '';
 			if ( $alias != '' ) {
 				$this->delete_header( $alias );
@@ -178,11 +184,15 @@ if ( $action != '' ) {
 			break;
 
 		case 'delete-layout':
+			check_admin_referer( 'delete-layout' );
+
 			$this->delete_layout( $_REQUEST['alias'] );
 
 			break;
 
 		case 'update-footer':
+			check_admin_referer( 'update-footer-nonce', 'update-footer-nonce' );
+
 			$title = isset( $_REQUEST['footer-title'] ) ? $_REQUEST['footer-title'] : '';
 			$alias = isset( $_REQUEST['old_alias'] ) ? $_REQUEST['old_alias'] : sanitize_title( $_REQUEST['footer-title'] );
 
@@ -200,6 +210,8 @@ if ( $action != '' ) {
 			break;
 
 		case 'delete-footer':
+			check_admin_referer( 'delete-footer' );
+
 			$alias = isset( $_REQUEST['alias'] ) ? sanitize_title( $_REQUEST['alias'] ) : '';
 			if ( $alias != '' ) {
 				$this->delete_footer( $alias );
@@ -209,6 +221,8 @@ if ( $action != '' ) {
 
 		case 'update-settings':
 			if ( ! empty( $_POST ) ) {
+				check_admin_referer( 'update-settings-nonce', 'update-settings-nonce' );
+
 				$this->update_layout_settings( $_POST );
 				$link     = admin_url( 'themes.php?page=layout-manager&navigation=settings&action=update-settings' );
 				$redirect = '<script type="text/javascript">window.location = "' . $link . '";</script>';
@@ -258,6 +272,8 @@ switch ( $this->navigation ) {
 		break;
 
 	case 'duplicate-layout':
+		check_admin_referer( 'duplicate-layout-nonce', 'duplicate-layout-nonce' );
+
 		$this->duplicate_layout( $_POST['duplicated_alias'], $_POST['duplicated_name'] );
 
 		$layouts  = $this->get_layouts();
@@ -269,7 +285,7 @@ switch ( $this->navigation ) {
 	case 'confirm-delete-layout':
 		$item_confirm   = 'layout';
 		$item_title     = $layouts_manager->layouts_manager_options['layouts'][ $alias ]['title'];
-		$action_url_yes = admin_url( 'themes.php?page=layout-manager&navigation=layouts-list&action=delete-layout&alias=' . $alias );
+		$action_url_yes = admin_url( 'themes.php?page=layout-manager&navigation=layouts-list&action=delete-layout&alias=' . $alias . '&_wpnonce=' . wp_create_nonce( 'delete-layout' ) );
 		$action_url_no  = admin_url( 'themes.php?page=layout-manager' );
 
 		require_once( get_template_directory() . '/framework/templates/delete-confirmation.php' );
@@ -308,7 +324,7 @@ switch ( $this->navigation ) {
 		$item_confirm   = 'header';
 		$header_confirm = $layouts_manager->get_header( $alias );
 		$item_title     = $header_confirm['title'];
-		$action_url_yes = admin_url( 'themes.php?page=layout-manager&navigation=headers-list&action=delete-header&alias=' . $alias );
+		$action_url_yes = admin_url( 'themes.php?page=layout-manager&navigation=headers-list&action=delete-header&alias=' . $alias . '&_wpnonce=' . wp_create_nonce( 'delete-header' ) );
 		$action_url_no  = admin_url( 'themes.php?page=layout-manager&navigation=headers-list' );
 
 		require_once( get_template_directory() . '/framework/templates/delete-confirmation.php' );
@@ -347,7 +363,7 @@ switch ( $this->navigation ) {
 		$item_confirm   = 'footer';
 		$footer_confirm = $layouts_manager->get_footer( $alias );
 		$item_title     = $footer_confirm['title'];
-		$action_url_yes = admin_url( 'themes.php?page=layout-manager&navigation=footers-list&action=delete-footer&alias=' . $alias );
+		$action_url_yes = admin_url( 'themes.php?page=layout-manager&navigation=footers-list&action=delete-footer&alias=' . $alias . '&_wpnonce=' . wp_create_nonce( 'delete-footer' ) );
 		$action_url_no  = admin_url( 'themes.php?page=layout-manager&navigation=footers-list' );
 
 		require_once( get_template_directory() . '/framework/templates/delete-confirmation.php' );

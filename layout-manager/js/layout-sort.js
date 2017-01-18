@@ -5,6 +5,7 @@
 
    var layoutsList = $('.layouts-list-sortable tbody');
    var old_rank, new_rank;
+   var nonce = $('#save-layouts-sort-nonce').val();
     
     layoutsList.sortable({
         items: 'tr',
@@ -34,7 +35,8 @@
             async:false,
             data: {
                 action: 'save_layouts_sort',
-                ranks: ranks
+                ranks: ranks,
+                nonce: nonce
             },
         }).done(function(response){ console.log(response);
             document.location = '?page=layout-manager';

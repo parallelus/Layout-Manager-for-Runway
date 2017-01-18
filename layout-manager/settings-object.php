@@ -434,6 +434,10 @@ class Layout_Manager_Admin_Object extends Runway_Admin_Object {
 
 	// Save layouts order after drag/drop sort
 	public function ajax_save_layouts_sort() {
+		if ( ! check_ajax_referer( 'save-layouts-sort-nonce', 'nonce', false ) ) {
+			echo json_encode( 'nonce_error' );
+			die();
+		}
 
 		$data = $_REQUEST;
 		foreach ( $this->layouts_manager_options['layouts'] as $key => $val ) {
@@ -451,6 +455,10 @@ class Layout_Manager_Admin_Object extends Runway_Admin_Object {
 
 	// Save optional labels for alias
 	public function ajax_save_optional_labels() {
+		if ( ! check_ajax_referer( 'optional-label-nonce', 'nonce', false ) ) {
+			echo json_encode( 'nonce_error' );
+			die();
+		}
 
 		$alias   = $_REQUEST['alias'];    //layout identificator
 		$source  = $_REQUEST['source'];    //selected option from select
@@ -566,6 +574,11 @@ class Layout_Manager_Admin_Object extends Runway_Admin_Object {
 
 	public function ajax_save_layout() {
 
+		if ( ! check_ajax_referer( 'update-layout-nonce', 'nonce', false ) ) {
+			echo json_encode( 'nonce_error' );
+			die();
+		}
+
 		$options = $_REQUEST;
 
 		if ( $_REQUEST['alias'] == '' ) {
@@ -657,6 +670,11 @@ class Layout_Manager_Admin_Object extends Runway_Admin_Object {
 	// Add or update header by ajax request
 	public function ajax_update_header() {
 
+		if ( ! check_ajax_referer( 'update-layout-nonce', 'nonce', false ) ) {
+			echo json_encode( 'nonce_error' );
+			die();
+		}
+
 		$alias = isset( $_REQUEST['alias'] ) ? $_REQUEST['alias'] : sanitize_title( $_REQUEST['title'] );
 
 		$options = array(
@@ -740,6 +758,11 @@ class Layout_Manager_Admin_Object extends Runway_Admin_Object {
 	/* ---- Work with "Other Options" ---- */
 	// Add or update header by ajax request
 	public function ajax_update_footer() {
+
+		if ( ! check_ajax_referer( 'update-layout-nonce', 'nonce', false ) ) {
+			echo json_encode( 'nonce_error' );
+			die();
+		}
 
 		$alias = isset( $_REQUEST['alias'] ) ? $_REQUEST['alias'] : sanitize_title( $_REQUEST['title'] );
 

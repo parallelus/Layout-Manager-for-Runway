@@ -5,6 +5,7 @@ wp_enqueue_script( 'layout-settings', FRAMEWORK_URL . 'extensions/layout-manager
 ?>
 
 <form action="<?php echo $this->self_url(); ?>&navigation=settings&action=update-settings" method="post">
+	<?php wp_nonce_field( 'update-settings-nonce' ,'update-settings-nonce' ); ?>
 	<h3><?php _e( 'Layout Sections', 'runway' ); ?></h3>
 	<table class="form-table">
 		<tbody>
