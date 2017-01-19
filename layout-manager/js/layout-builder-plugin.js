@@ -267,7 +267,7 @@ function initGridControls() {
 						// console.log($(e).find('.add-column').length);
 						
 						// add element button
-						return $(e).append('<button class="add-element button">+</button>');
+						return $(e).append('<button class="add-element button" title="'+translations_js.add_element+'">+</button>');
 					}
 
 				});
@@ -284,8 +284,8 @@ function initGridControls() {
 					if ( ! $(e).find('.add-column').length ) {
 						
 						// add container buttons
-						$button_addToStart = $(e).append('<button class="add-to-start add-column button">+</button>');
-						$button_addToEnd   = $(e).append('<button class="add-to-end add-column button">+</button>');
+						$button_addToStart = $(e).append('<button class="add-to-start add-column button" title="'+translations_js.add_column+'">+</button>');
+						$button_addToEnd   = $(e).append('<button class="add-to-end add-column button" title="'+translations_js.add_column+'">+</button>');
 					}
 
 				});
